@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.springapp.light.dao;
+package com.springapp.wood.dao;
 
 
 import com.springapp.light.domain.LightOffice;
@@ -31,7 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Repository 
-public class LightOfficeDaoImpl extends PrintInFile implements LightOfficeDao{
+public class WoodDaoImpl extends PrintInFile implements WoodDao{
 
     @Autowired private SessionFactory sessionFactory;
 

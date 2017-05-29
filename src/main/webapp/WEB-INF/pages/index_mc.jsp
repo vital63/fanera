@@ -222,7 +222,7 @@
         </c:when>
         
         
-        <c:when test="${localeCode=='russia'}">
+        <c:when test="${localeCode=='ru'}">
                 <div class="item" style="background-image: url(../resources/assets/images/sliders/flag-russia.jpg);">
                     <div class="container-fluid">
                            <div class="caption vertical-center text-left">

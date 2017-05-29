@@ -11,6 +11,7 @@
               
          
                 <li><a href="/light"><spring:message code="all_departments.light" text="Industrial lighting" /></a></li>
+                <li><a href="/wood"><spring:message code="all_departments.plywood" text="Plywood" /></a></li>
       
                 
                 

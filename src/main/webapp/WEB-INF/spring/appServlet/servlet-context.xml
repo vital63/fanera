@@ -20,75 +20,28 @@
     <resources mapping="/sitemap.xml" location="/sitemap.xml"/>
 
     <!-- Отображение видов на jsp-файлы, лежащие в папке /WEB-INF/views -->
-    <beans:bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/pages/"/>
         <beans:property name="suffix" value=".jsp"/>
     </beans:bean>
 
     <!-- Internationalization -->
-<!--    <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <beans:property name="basename" value="classpath:messages"/>
-        <beans:property name="defaultEncoding" value="UTF-8"/>
-    </beans:bean>
-
-    <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-        <beans:property name="defaultLocale" value="en"/>
-    </beans:bean>
-
-    <beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-        <beans:property name="paramName" value="lang"/>
-    </beans:bean>
-
-    <interceptors>
-        <beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-            <beans:property name="paramName" value="lang" />
-        </beans:bean>
-    </interceptors>-->
-
-   <!--Change language: start-->
-        <beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <beans:property name="basename" value="messages" />
     </beans:bean>
     
-    	<beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-		<beans:property name="defaultLocale" value="en" />
-	</beans:bean> 
-
+    <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+	<beans:property name="defaultLocale" value="en" />
+    </beans:bean> 
     
-     <interceptors>
+    <interceptors>
 	<beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 		<beans:property name="paramName" value="lang" />
 	</beans:bean>
     </interceptors> 
-    <!--Change language: finish-->
-
 
 
     <!-- Файл с настройками контроллеров -->
     <beans:import resource="controllers.xml"/>
     <beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
 </beans:beans>
-
-
-
-
-
-    <!--Change language: start-->
-<!--        <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="messages" />
-    </bean>
-    
-    	<bean id="localeResolver"
-		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-		<property name="defaultLocale" value="en" />
-	</bean> 
-
-    
-     <mvc:interceptors>
-	<bean id="localeChangeInterceptor"
-		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-		<property name="paramName" value="lang" />
-	</bean>
-    </mvc:interceptors> -->
-    <!--Change language: finish-->
