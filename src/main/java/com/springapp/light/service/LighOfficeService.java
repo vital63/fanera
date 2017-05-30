@@ -20,9 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 public interface LighOfficeService {
     
 
- public String[] listImage(String path);
+    public String[] listImage(String path);
  
-  public void uploadImagesLight(String path, MultipartFile[] images);
+    public void uploadImagesLight(String path, MultipartFile[] images);
 //    public Wesold getWesold(int id);
     public LightOffice getLightByUrl(String url);
     public LightOffice getLightById(String id);

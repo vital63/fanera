@@ -6,35 +6,36 @@
 package com.springapp.wood.dao;
 
 
-import com.springapp.light.domain.LightOffice;
-import com.springapp.light.domain.LightOfficePower;
-import com.springapp.light.domain.LightOfficeSize;
-import com.springapp.light.domain.LightOfficeType;
-
-
+import com.springapp.wood.domain.WoodLength;
+import com.springapp.wood.domain.Wood;
+import com.springapp.wood.domain.WoodThickness;
+import com.springapp.wood.domain.WoodType;
+import com.springapp.wood.domain.WoodWidth;
 import java.util.List;
 
 
 
 public interface WoodDao {
     
-    public List<LightOffice> getListLightOffice();
-    public List<LightOffice> getListLightOffice(String emergency, String [] arrPowers, String size, String type);
-    public LightOffice getLightByUrl(String url);
-    public LightOffice getLightById(String id);
+    public List<Wood> getListWood();
+    public List<Wood> getListWood(String[] lengths, String[] widths, String[] thicknesses, String type);
+    public Wood getWoodByUrl(String url);
+    public Wood getWoodById(String id);
     
-    public void saveLightOffice(LightOffice lightOffice);
+    public void saveWood(Wood wood);
  
-    public List<LightOfficePower> getListLightOfficePower();
-    public List<LightOfficeSize> getListLightOfficeSize();
-    public List<LightOfficeType> getListLightOfficeType();
+    public List<WoodLength> getListWoodLength();
+    public List<WoodWidth> getListWoodWidth();
+    public List<WoodThickness> getListWoodThickness();
+    public List<WoodType> getListWoodType();
 
     
-    public void  renewLightOfficePower();
-    public void  renewLightOfficeSize();
+    public void  renewWoodLength();
+    public void  renewWoodWidth();
+    public void  renewWoodThickness();
+    public void  renewWoodType();
 
-    public void  renewLightOfficeType();
-    public List<LightOffice> getListLighByIds(String [] ids);
-    public List<LightOffice> getListLightFromSearch(String word);
+    public List<Wood> getListWoodByIds(String [] ids);
+    public List<Wood> getListWoodFromSearch(String word);
     
 }

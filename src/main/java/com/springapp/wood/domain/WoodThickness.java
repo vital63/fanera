@@ -10,8 +10,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,9 +20,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 ////     "light/office/" +   
 
 
-//@Entity
-//@Table(name="light_office_power", schema = "", catalog = "light_test")
-//@XmlRootElement
+@Entity
+@Table(name="wood_thickness", schema = "", catalog = "fanera")
+@XmlRootElement
 //@NamedQueries({
 //    @NamedQuery(name = "WoodThickness.findAll", query = "SELECT l FROM WoodThickness l"),
 //    @NamedQuery(name = "WoodThickness.findByPower", query = "SELECT l FROM WoodThickness l WHERE l.thickness = :thickness"),
@@ -40,7 +38,7 @@ public class WoodThickness implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "num")
-    private int num;
+    private Integer num;
 
     public WoodThickness() {
     }
@@ -49,32 +47,30 @@ public class WoodThickness implements Serializable {
         this.thickness = power;
     }
 
-    public WoodThickness(Integer power, int num) {
+    public WoodThickness(Integer power, Integer num) {
         this.thickness = power;
         this.num = num;
     }
 
-    public Integer getPower() {
+    public Integer getThickness() {
         return thickness;
     }
 
-    public void setPower(Integer power) {
-        this.thickness = power;
+    public void setThickness(Integer thickness) {
+        this.thickness = thickness;
     }
 
-    public int getNum() {
+    public Integer getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(Integer num) {
         this.num = num;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (thickness != null ? thickness.hashCode() : 0);
-        return hash;
+        return thickness != null ? thickness.hashCode() : 0;
     }
 
     @Override

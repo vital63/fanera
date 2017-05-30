@@ -6,22 +6,16 @@
 package com.springapp.wood.dao;
 
 
-import com.springapp.light.domain.LightOffice;
-import com.springapp.light.domain.LightOfficePower;
-import com.springapp.light.domain.LightOfficeSize;
-import com.springapp.light.domain.LightOfficeType;
+import com.springapp.wood.domain.Wood;
+import com.springapp.wood.domain.WoodLength;
+import com.springapp.wood.domain.WoodWidth;
+import com.springapp.wood.domain.WoodThickness;
+import com.springapp.wood.domain.WoodType;
 
 
-import com.springapp.mvc.util.PrintInFile;
-
-
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -31,177 +25,185 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Repository 
-public class WoodDaoImpl extends PrintInFile implements WoodDao{
+public class WoodDaoImpl implements WoodDao{
 
     @Autowired private SessionFactory sessionFactory;
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public Wood getWoodByUrl(String url) { 
+        Query query = sessionFactory.getCurrentSession().createQuery("from Wood where url='" + url+ "'" );
+        return (Wood) query.uniqueResult();
+    }
 
     @Override
     @SuppressWarnings("unchecked")
-    public LightOffice getLightByUrl(String url) { 
-        Query query = sessionFactory.getCurrentSession().createQuery("from LightOffice where url='" + url+ "'" );
-        return (LightOffice) query.uniqueResult();
+    public Wood getWoodById(String id) { 
+        Query query = sessionFactory.getCurrentSession().createQuery("from Wood where id='" + id+ "'" );
+        return (Wood) query.uniqueResult();
     }
-
-    @Override
+    
+    @Override 
     @SuppressWarnings("unchecked")
-    public LightOffice getLightById(String id) { 
-        Query query = sessionFactory.getCurrentSession().createQuery("from LightOffice where id='" + id+ "'" );
-        return (LightOffice) query.uniqueResult();
+    public void saveWood(Wood wood) { 
+        sessionFactory.getCurrentSession().saveOrUpdate(wood);
     }
     
-    //       ORDER BY model DESC
-    
-    @Override @SuppressWarnings("unchecked")
-    public void saveLightOffice(LightOffice lightOffice) { 
-    sessionFactory.getCurrentSession().saveOrUpdate(lightOffice);
+    @Override 
+    @SuppressWarnings("unchecked")
+    public List<WoodLength> getListWoodLength(){ 
+        return (List<WoodLength> )sessionFactory.getCurrentSession().createCriteria(WoodLength.class)
+                                                    .addOrder(Order.desc("length")) .list();  
     }
-    
-    @Override @SuppressWarnings("unchecked")
-    public List<LightOfficePower> getListLightOfficePower(){ 
-       return (List<LightOfficePower> )sessionFactory.getCurrentSession().createCriteria(LightOfficePower.class).list();
-   }
  
-    
-    @Override @SuppressWarnings("unchecked")
-    public List<LightOfficeSize> getListLightOfficeSize(){ 
-       return (List<LightOfficeSize> )sessionFactory.getCurrentSession().createCriteria(LightOfficeSize.class)
-                                                    .addOrder(Order.desc("size")) .list();  
-    }
-        @Override
+    @Override 
     @SuppressWarnings("unchecked")
-    public List<LightOfficeType> getListLightOfficeType(){ 
-//       return sessionFactory.getCurrentSession().createCriteria(LightOfficePower.class).addOrder(Order.desc("power")).list();
-       return (List<LightOfficeType> )sessionFactory.getCurrentSession().createCriteria(LightOfficeType.class)
-               .addOrder(Order.desc("type"))
-               .list();
+    public List<WoodWidth> getListWoodWidth(){ 
+        return (List<WoodWidth> )sessionFactory.getCurrentSession().createCriteria(WoodWidth.class)
+                                                    .addOrder(Order.desc("width")) .list();  
+    }
+        
+    @Override 
+    @SuppressWarnings("unchecked")
+    public List<WoodThickness> getListWoodThickness(){ 
+        return (List<WoodThickness> )sessionFactory.getCurrentSession().createCriteria(WoodThickness.class)
+                                                    .addOrder(Order.desc("thickness")) .list();  
+    }
+        
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<WoodType> getListWoodType(){ 
+//       return sessionFactory.getCurrentSession().createCriteria(WoodPower.class).addOrder(Order.desc("power")).list();
+       return (List<WoodType> )sessionFactory.getCurrentSession().createCriteria(WoodType.class)
+               .addOrder(Order.desc("type")).list();
 //        return  (List<Vmc> ) sessionFactory.getCurrentSession().createCriteria(Vmc.class).list();
     }
     
     
-  
-
-    
-   
-    
     @Override
     @SuppressWarnings("unchecked")
-    public List<LightOffice> getListLightOffice() {
-    return sessionFactory.getCurrentSession().createCriteria(LightOffice.class).addOrder(Order.desc("model")).list();
+    public List<Wood> getListWood() {
+    return sessionFactory.getCurrentSession().createCriteria(Wood.class).addOrder(Order.desc("model")).list();
     }
     
     @Override
     @SuppressWarnings("unchecked")
-    public List<LightOffice> getListLightOffice(String emergency, String [] arrPowers, String size, String type) {
-        Criteria crit = sessionFactory.getCurrentSession().createCriteria(LightOffice.class);
-    if (emergency != null)  crit.add(Restrictions.ne("luminousFluxEmergency", 0));
-    if (arrPowers != null && !arrPowers[0].equals(""))   crit.add(Restrictions.in("power", arrPowers));
-    if (size != null && !size.equals(""))  crit.add(Restrictions.eq("size", size));
-    if (type != null && !type.equals(""))  crit.add(Restrictions.eq("type", type));
-         return crit.list();
+    public List<Wood> getListWood(String[] lengths, String[] widths, String[] thicknesses, String type)
+    {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(Wood.class);
+//        if (emergency != null)  crit.add(Restrictions.ne("luminousFluxEmergency", 0));
+//        if (arrPowers != null && !arrPowers[0].equals(""))   crit.add(Restrictions.in("power", arrPowers));
+//        if (size != null && !size.equals(""))  crit.add(Restrictions.eq("size", size));
+//        if (type != null && !type.equals(""))  crit.add(Restrictions.eq("type", type));
+        return crit.list();
     }
 
     
-     
 
-     
-    @Override
-    @SuppressWarnings("unchecked")
-    public void renewLightOfficePower() {
-        renewLightFilter(LightOfficePower.class.getSimpleName(),"office", "power");
-    }
-    @Override
-    @SuppressWarnings("unchecked")
-    public void renewLightOfficeSize() {
-        renewLightFilter(LightOfficeSize.class.getSimpleName(),"office", "size");
-    }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public void renewLightOfficeType() {
-        renewLightFilter(LightOfficeType.class.getSimpleName(), "all", "type");
-    }
-
- 
-
-  
-    
     
     @Override
     @SuppressWarnings("unchecked")
-    public List<LightOffice> getListLighByIds(String [] idsArr){
-     Criteria criteria = sessionFactory.getCurrentSession().createCriteria(LightOffice.class);
-     if (idsArr != null && !idsArr[0].equals("") )   criteria.add(Restrictions.in("id",  idsArr));
-        return criteria.list(); 
+    public void renewWoodLength(){
+//        renewWoodFilter(WoodLength.class.getSimpleName(), "office", "power");
+    }
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public void renewWoodWidth(){
+//        renewWoodFilter(WoodWidth.class.getSimpleName(), "office", "power");
+    }
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public void renewWoodThickness(){
+//        renewWoodFilter(WoodThickness.class.getSimpleName(), "office", "power");
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void renewWoodType() {
+//        renewWoodFilter(WoodType.class.getSimpleName(), "all", "type");
+    }
+
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Wood> getListWoodByIds(String [] idsArr){
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Wood.class);
+        if (idsArr != null && !idsArr[0].equals("") )   criteria.add(Restrictions.in("id",  idsArr));
+            return criteria.list(); 
     } 
     
     @Override @SuppressWarnings("unchecked")
-    public List<LightOffice> getListLightFromSearch(String word){
-    return sessionFactory.getCurrentSession().createQuery("from LightOffice where model LIKE '%"+word+"%' ORDER BY model DESC").list();
+    public List<Wood> getListWoodFromSearch(String word){
+        return sessionFactory.getCurrentSession().createQuery("from Wood where model LIKE '%" + word + "%' ORDER BY model DESC").list();
     } 
     
-    
-    
     @SuppressWarnings("unchecked")
-    private void renewLightFilter(String className, String typeLight, String checkBoxName) {
-        Session session = sessionFactory.getCurrentSession();
-        session.createQuery("delete from " + className).executeUpdate();
-        List<String> list;
-        if(typeLight.equals("all"))  
-            list = session.createQuery("select M." + checkBoxName + " from LightOffice M").list();
-        else  
-            list = session.createQuery("select M." + checkBoxName + " from LightOffice M where type='"+typeLight+"'").list();
-
-               
-        for (int i = 0; i < list.size(); i++) {
-            list.set(i, list.get(i).toLowerCase());
-        }
-        
-        Set<String> set = new HashSet<String>();
-        for(String val : list) {
-            set.add(val);
-        }
-        
-        if(className.equals(LightOfficePower.class.getSimpleName())) {
-            for (String s : set) {
-                session.save(getLightOfficePower((Integer.parseInt(s)) , Collections.frequency(list, s)));
-            }
-        } else if(className.equals(LightOfficeSize.class.getSimpleName())) {
-            for (String s : set) {
-                session.save(getLightOfficeSize(s, Collections.frequency(list, s)));
-            }
-        }
-        else if(className.equals(LightOfficeType.class.getSimpleName())){
-            for (String s : set) {
-                session.save(getLightOfficeType(s, Collections.frequency(list, s)));
-            }
-        }
-        
-        
-  
+    private void renewWoodFilter(String className, String typeWood, String checkBoxName) {
+//        Session session = sessionFactory.getCurrentSession();
+//        session.createQuery("delete from " + className).executeUpdate();
+//        List<String> list;
+//        if(typeWood.equals("all"))  
+//            list = session.createQuery("select M." + checkBoxName + " from Wood M").list();
+//        else  
+//            list = session.createQuery("select M." + checkBoxName + " from Wood M where type='"+typeWood+"'").list();
+//
+//               
+//        for (int i = 0; i < list.size(); i++) {
+//            list.set(i, list.get(i).toLowerCase());
+//        }
+//        
+//        Set<String> set = new HashSet<String>();
+//        for(String val : list) {
+//            set.add(val);
+//        }
+//        
+//        if(className.equals(WoodPower.class.getSimpleName())) {
+//            for (String s : set) {
+//                session.save(getWoodPower((Integer.parseInt(s)) , Collections.frequency(list, s)));
+//            }
+//        } else if(className.equals(WoodSize.class.getSimpleName())) {
+//            for (String s : set) {
+//                session.save(getWoodSize(s, Collections.frequency(list, s)));
+//            }
+//        }
+//        else if(className.equals(WoodType.class.getSimpleName())){
+//            for (String s : set) {
+//                session.save(getWoodType(s, Collections.frequency(list, s)));
+//            }
+//        }
     }
 
   
     
-    private LightOfficePower getLightOfficePower(int val, int num) {
-        LightOfficePower lightOfficePower = new LightOfficePower();
-        lightOfficePower.setPower(val);
-        lightOfficePower.setNum(num);
-        return lightOfficePower;
+    private WoodLength getWoodLength(int val, int num) {
+        WoodLength woodLength = new WoodLength();
+        woodLength.setLength(val);
+        woodLength.setNum(num);
+        return woodLength;
     }
     
-    private LightOfficeSize getLightOfficeSize(String val, int num) {
-        LightOfficeSize lightOfficePower = new LightOfficeSize();
-        lightOfficePower.setSize(val);
-        lightOfficePower.setNum(num);
-        return lightOfficePower;
+    private WoodWidth getWoodSize(int val, int num) {
+        WoodWidth woodWidth = new WoodWidth();
+        woodWidth.setWidth(val);
+        woodWidth.setNum(num);
+        return woodWidth;
     }
     
-    private LightOfficeType getLightOfficeType(String val, int num) {
-        LightOfficeType lightOfficeType = new LightOfficeType();
-        lightOfficeType.setType(val);
-        lightOfficeType.setNum(num);
-        return lightOfficeType;
+    private WoodThickness getWoodThickness(int val, int num) {
+        WoodThickness woodThickness = new WoodThickness();
+        woodThickness.setThickness(val);
+        woodThickness.setNum(num);
+        return woodThickness;
+    }
+    
+    private WoodType getWoodType(String val, int num) {
+        WoodType woodType = new WoodType();
+        woodType.setType(val);
+        woodType.setNum(num);
+        return woodType;
     }
     
 }

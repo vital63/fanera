@@ -41,6 +41,13 @@ public class WoodServiceImpl implements WoodService {
 //        }
     }
     
+    @Override
+    @Transactional
+    public void saveWood(Wood wood) {
+        System.out.println("saveWood: " + wood);
+        woodDao.saveWood(wood);
+    }
+
     private List<Wood> getFakeListWood(){
         List<Wood> result = new ArrayList<>();
         result.add(new Wood("Raw plywood", "1250x1250x15_sanded_FK", "1250-1250-15-sanded-FK", 1250, 1250, 15, "sanded"));
@@ -209,7 +216,5 @@ public class WoodServiceImpl implements WoodService {
         
 //      return lightOfficeDao.getListLightFromSearch( word);
     }
-
-   
     
 }

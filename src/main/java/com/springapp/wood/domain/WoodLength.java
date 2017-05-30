@@ -8,13 +8,8 @@ package com.springapp.wood.domain;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
  ////     @Table(name="light_office", schema = "", catalog = "qjvmhoia_hmc")
@@ -40,7 +35,7 @@ public class WoodLength implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "num")
-    private int num;
+    private Integer num;
 
     public WoodLength() {
     }
@@ -49,32 +44,30 @@ public class WoodLength implements Serializable {
         this.length = length;
     }
 
-    public WoodLength(Integer length, int num) {
+    public WoodLength(Integer length, Integer num) {
         this.length = length;
         this.num = num;
     }
 
-    public Integer getPower() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setPower(Integer power) {
-        this.length = power;
+    public void setLength(Integer length) {
+        this.length = length;
     }
 
-    public int getNum() {
+    public Integer getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(Integer num) {
         this.num = num;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (length != null ? length.hashCode() : 0);
-        return hash;
+        return length != null ? length.hashCode() : 0;
     }
 
     @Override

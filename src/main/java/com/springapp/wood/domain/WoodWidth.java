@@ -10,8 +10,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,9 +20,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 ////     "light/office/" +   
 
 
-//@Entity
-//@Table(name="light_office_power", schema = "", catalog = "light_test")
-//@XmlRootElement
+@Entity
+@Table(name="wood_width", schema = "", catalog = "fanera")
+@XmlRootElement
 //@NamedQueries({
 //    @NamedQuery(name = "WoodThickness.findAll", query = "SELECT l FROM WoodThickness l"),
 //    @NamedQuery(name = "WoodThickness.findByPower", query = "SELECT l FROM WoodThickness l WHERE l.thickness = :thickness"),
@@ -40,7 +38,7 @@ public class WoodWidth implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "num")
-    private int num;
+    private Integer num;
 
     public WoodWidth() {
     }
@@ -49,32 +47,30 @@ public class WoodWidth implements Serializable {
         this.width = power;
     }
 
-    public WoodWidth(Integer power, int num) {
+    public WoodWidth(Integer power, Integer num) {
         this.width = power;
         this.num = num;
     }
 
-    public Integer getPower() {
+    public Integer getWidth() {
         return width;
     }
 
-    public void setPower(Integer power) {
-        this.width = power;
+    public void setWidth(Integer width) {
+        this.width = width;
     }
 
-    public int getNum() {
+    public Integer getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(Integer num) {
         this.num = num;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (width != null ? width.hashCode() : 0);
-        return hash;
+        return width != null ? width.hashCode() : 0;
     }
 
     @Override

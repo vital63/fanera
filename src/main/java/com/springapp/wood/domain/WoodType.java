@@ -24,10 +24,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="light_office_type", schema = "", catalog = "light_test")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "LightOfficeType.findAll", query = "SELECT l FROM LightOfficeType l"),
-    @NamedQuery(name = "LightOfficeType.findByType", query = "SELECT l FROM LightOfficeType l WHERE l.type = :type"),
-    @NamedQuery(name = "LightOfficeType.findByNum", query = "SELECT l FROM LightOfficeType l WHERE l.num = :num")})
+//@NamedQueries({
+//    @NamedQuery(name = "LightOfficeType.findAll", query = "SELECT l FROM LightOfficeType l"),
+//    @NamedQuery(name = "LightOfficeType.findByType", query = "SELECT l FROM LightOfficeType l WHERE l.type = :type"),
+//    @NamedQuery(name = "LightOfficeType.findByNum", query = "SELECT l FROM LightOfficeType l WHERE l.num = :num")})
 public class WoodType implements Serializable {
 
     private static final long serialVersionUID = 1L;

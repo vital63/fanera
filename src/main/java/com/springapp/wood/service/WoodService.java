@@ -23,6 +23,9 @@ public interface WoodService {
     public String[] listImage(String path);
     
     public void uploadImagesWood(String path, MultipartFile[] images);
+    public void saveWood(Wood wood);
+    
+    
 //    public Wesold getWesold(int id);
     public Wood getWoodByUrl(String url);
     public Wood getWoodById(String id);

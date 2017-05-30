@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
-@Table(name="wood", schema = "", catalog = "wood")
+@Table(name="wood", schema = "", catalog = "fanera")
 @XmlRootElement
 //@NamedQueries({
 //    @NamedQuery(name = "LightOffice.findAll",                       query = "SELECT l FROM LightOffice l"),

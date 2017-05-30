@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.springapp.light.domain.LightOffice;
+import com.springapp.light.service.LighOfficeService;
+import java.util.Date;
 
 @Controller
 public class ControllerWood extends PrintInFile {
@@ -52,6 +55,13 @@ public class ControllerWood extends PrintInFile {
         return mv;
     }
     
+    @RequestMapping(value = "/wood/save", method = RequestMethod.GET)
+    public String saveWood(){
+        long ind = new Date().getTime();
+        Wood wood = new Wood("Raw plywood", "1250x1250x15_sanded_FK" + ind, "1250-1250-15-sanded-FK", 1250, 1250, 15, "sanded");
+        woodService.saveWood(wood);
+        return "redirect:/wood";
+    }
     
     
     @RequestMapping(value = "/wood-{url}", method = RequestMethod.GET)
