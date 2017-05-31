@@ -8,8 +8,11 @@ package com.springapp.wood.domain;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,6 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name="wood", schema = "", catalog = "fanera")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
 @XmlRootElement
 //@NamedQueries({
 //    @NamedQuery(name = "LightOffice.findAll",                       query = "SELECT l FROM LightOffice l"),
@@ -33,7 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 //    @NamedQuery(name = "LightOffice.findByPhoto1",                  query = "SELECT l FROM LightOffice l WHERE l.photo1 = :photo1"),
 //    @NamedQuery(name = "LightOffice.findByPhoto2",                  query = "SELECT l FROM LightOffice l WHERE l.photo2 = :photo2"),
 //    @NamedQuery(name = "LightOffice.findByPhoto3",                  query = "SELECT l FROM LightOffice l WHERE l.photo3 = :photo3"),
-public class Wood implements Serializable {
+public abstract class Wood implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -41,16 +46,10 @@ public class Wood implements Serializable {
     @Column(name = "id")
     private String id;
 
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 245)
-    @Column(name = "type")
-    private String type;
-
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 250)
+    @Size(min = 1, max = 255)
     @Column(name = "model")
     private String model;
 
@@ -74,12 +73,6 @@ public class Wood implements Serializable {
     @NotNull
     @Column(name = "thickness")
     private int thickness;
-
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
-    @Column(name = "laminated_color")
-    private String laminatedColor;
 
     @Column(name = "price")
     private Double price;
@@ -131,14 +124,12 @@ public class Wood implements Serializable {
         this.model = model;
     }
 
-    public Wood(String type, String model, String url, int length, int width, int thickness, String laminatedColor) {
-        this.type = type;
+    public Wood(String model, String url, int length, int width, int thickness) {
         this.model = model;
         this.url = url;
         this.length = length;
         this.width = width;
         this.thickness = thickness;
-        this.laminatedColor = laminatedColor;
     }
 
     public String getId() {
@@ -147,14 +138,6 @@ public class Wood implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getModel() {
@@ -245,14 +228,6 @@ public class Wood implements Serializable {
         this.thickness = thickness;
     }
 
-    public String getLaminatedColor() {
-        return laminatedColor;
-    }
-
-    public void setLaminatedColor(String laminatedColor) {
-        this.laminatedColor = laminatedColor;
-    }
-
     public Double getPrice() {
         return price;
     }
@@ -309,4 +284,6 @@ public class Wood implements Serializable {
     public String toString() {
         return "com.springapp.wood.domain.Wood[ model=" + model + " ]";
     }
+    
+    abstract public String getType();
 }

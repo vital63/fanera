@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.springapp.light.domain.LightOffice;
 import com.springapp.light.service.LighOfficeService;
+import com.springapp.wood.domain.LaminatedParticleBoard;
+import com.springapp.wood.domain.RawPlywood;
 import java.util.Date;
 
 @Controller
@@ -58,8 +60,13 @@ public class ControllerWood extends PrintInFile {
     @RequestMapping(value = "/wood/save", method = RequestMethod.GET)
     public String saveWood(){
         long ind = new Date().getTime();
-        Wood wood = new Wood("Raw plywood", "1250x1250x15_sanded_FK" + ind, "1250-1250-15-sanded-FK", 1250, 1250, 15, "sanded");
+
+        Wood wood = new RawPlywood("1/1", true, true, "1250x1250x15_sanded_FK" + ind, "1250-1250-15-sanded-FK", 1250, 1250, 15);
         woodService.saveWood(wood);
+
+        wood = new LaminatedParticleBoard("Book Bavarija 109", "2750x1830x16_BukBavarija_109" + ind, "2750x1830x16-BukBavarija-109", 2750, 1830, 16);
+        woodService.saveWood(wood);
+        
         return "redirect:/wood";
     }
     

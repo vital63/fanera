@@ -62,6 +62,8 @@
     <class>com.springapp.boiler.domain.AirHeater</class>
     <class>com.springapp.light.domain.LightIndustrialLidc</class>
     <class>com.springapp.wood.domain.Wood</class>
+    <class>com.springapp.wood.domain.RawPlywood</class>
+    <class>com.springapp.wood.domain.LaminatedParticleBoard</class>
     <class>com.springapp.wood.domain.WoodLength</class>
     <class>com.springapp.wood.domain.WoodWidth</class>
     <class>com.springapp.wood.domain.WoodThickness</class>

@@ -50,8 +50,8 @@ public class WoodServiceImpl implements WoodService {
 
     private List<Wood> getFakeListWood(){
         List<Wood> result = new ArrayList<>();
-        result.add(new Wood("Raw plywood", "1250x1250x15_sanded_FK", "1250-1250-15-sanded-FK", 1250, 1250, 15, "sanded"));
-        result.add(new Wood("Laminated particle board", "2750x1830x16_BukBavarija_109", "2750-1830-16-BukBavarija-109", 2750, 1830, 16, "Book Bavarija 109"));
+//        result.add(new Wood("Raw plywood", "1250x1250x15_sanded_FK", "1250-1250-15-sanded-FK", 1250, 1250, 15, "sanded"));
+//        result.add(new Wood("Laminated particle board", "2750x1830x16_BukBavarija_109", "2750-1830-16-BukBavarija-109", 2750, 1830, 16, "Book Bavarija 109"));
         return result;
     }
     

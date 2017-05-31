@@ -23,6 +23,8 @@
         <mapping class="com.springapp.light.domain.LightOfficeSize"/>
          
         <mapping class="com.springapp.wood.domain.Wood"/>
+        <mapping class="com.springapp.wood.domain.RawPlywood"/>
+        <mapping class="com.springapp.wood.domain.LaminatedParticleBoard"/>
         <mapping class="com.springapp.wood.domain.WoodLength"/>
         <mapping class="com.springapp.wood.domain.WoodWidth"/>
         <mapping class="com.springapp.wood.domain.WoodThickness"/>
