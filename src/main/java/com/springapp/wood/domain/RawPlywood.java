@@ -26,8 +26,8 @@ public class RawPlywood extends Wood {
     public RawPlywood() {
     }
 
-    public RawPlywood(String grade, Boolean isSanded, Boolean isWaterResistance, String model, String url, int length, int width, int thickness) {
-        super(model, url, length, width, thickness);
+    public RawPlywood(String grade, Boolean isSanded, Boolean isWaterResistance, String id, String url, int length, int width, int thickness) {
+        super(id, url, length, width, thickness);
         this.grade = grade;
         this.isSanded = isSanded;
         this.isWaterResistance = isWaterResistance;

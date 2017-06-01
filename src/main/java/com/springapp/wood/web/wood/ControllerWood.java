@@ -16,11 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.springapp.light.domain.LightOffice;
-import com.springapp.light.service.LighOfficeService;
-import com.springapp.wood.domain.LaminatedParticleBoard;
-import com.springapp.wood.domain.RawPlywood;
-import java.util.Date;
 
 @Controller
 public class ControllerWood extends PrintInFile {
@@ -57,20 +52,6 @@ public class ControllerWood extends PrintInFile {
         return mv;
     }
     
-    @RequestMapping(value = "/wood/save", method = RequestMethod.GET)
-    public String saveWood(){
-        long ind = new Date().getTime();
-
-        Wood wood = new RawPlywood("1/1", true, true, "1250x1250x15_sanded_FK" + ind, "1250-1250-15-sanded-FK", 1250, 1250, 15);
-        woodService.saveWood(wood);
-
-        wood = new LaminatedParticleBoard("Book Bavarija 109", "2750x1830x16_BukBavarija_109" + ind, "2750x1830x16-BukBavarija-109", 2750, 1830, 16);
-        woodService.saveWood(wood);
-        
-        return "redirect:/wood";
-    }
-    
-    
     @RequestMapping(value = "/wood-{url}", method = RequestMethod.GET)
     public ModelAndView wood_one(@PathVariable ("url") String url, HttpSession session) {
     
@@ -78,7 +59,7 @@ public class ControllerWood extends PrintInFile {
         Wood wood = woodService.getWoodByUrl(url);
         mv.addObject("wood", wood);
         
-        mv.addObject("message", new Message("Wood " +wood.getType() , wood.getModel())); // it is need for feed back !!!!!!
+        mv.addObject("message", new Message("Wood " +wood.getType() , wood.getId())); // it is need for feed back !!!!!!
         session.setAttribute("search", "wood"); // for search
         session.setAttribute("currentpagewithpage", "/wood-" + url);
         return mv;

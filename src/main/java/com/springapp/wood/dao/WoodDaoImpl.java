@@ -32,7 +32,7 @@ public class WoodDaoImpl implements WoodDao{
     @Override
     @SuppressWarnings("unchecked")
     public Wood getWoodByUrl(String url) { 
-        Query query = sessionFactory.getCurrentSession().createQuery("from Wood where url='" + url+ "'" );
+        Query query = sessionFactory.getCurrentSession().createQuery("from Wood where url='" + url + "'" );
         return (Wood) query.uniqueResult();
     }
 
@@ -83,7 +83,7 @@ public class WoodDaoImpl implements WoodDao{
     @Override
     @SuppressWarnings("unchecked")
     public List<Wood> getListWood() {
-    return sessionFactory.getCurrentSession().createCriteria(Wood.class).addOrder(Order.desc("model")).list();
+        return sessionFactory.getCurrentSession().createCriteria(Wood.class).addOrder(Order.desc("id")).list();
     }
     
     @Override
@@ -135,9 +135,10 @@ public class WoodDaoImpl implements WoodDao{
             return criteria.list(); 
     } 
     
-    @Override @SuppressWarnings("unchecked")
+    @Override 
+    @SuppressWarnings("unchecked")
     public List<Wood> getListWoodFromSearch(String word){
-        return sessionFactory.getCurrentSession().createQuery("from Wood where model LIKE '%" + word + "%' ORDER BY model DESC").list();
+        return sessionFactory.getCurrentSession().createQuery("from Wood where id LIKE '%" + word + "%' ORDER BY id DESC").list();
     } 
     
     @SuppressWarnings("unchecked")

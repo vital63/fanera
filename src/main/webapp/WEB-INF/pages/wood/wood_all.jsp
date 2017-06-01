@@ -325,13 +325,13 @@
                                 
                                 <div class="image">
                                     <a href="/wood-${wood.url}">
-                                        <img alt="${wood.model}" src="../resources/assets/images/blank.gif" data-echo="../resources/assets/images/products/${wood.photo1}" width="246" height="186" />
+                                        <img alt="${wood.id}" src="../resources/assets/images/blank.gif" data-echo="../resources/assets/images/products/${wood.photo1}" width="246" height="186" />
                                     </a>
                                 </div>
                                 <div class="body">
                                     <!--<div class="label-discount green">-10 % sale</div>-->
                                     <div class="title">
-                                        <a href="/wood-${wood.url}"> ${wood.model}  </a>
+                                        <a href="/wood-${wood.url}"> ${wood.id}  </a>
                                     </div>
                                     <div class="brand"><spring:message code="woodall.type" text="Type" />:  ${wood.type}</div>
                                         

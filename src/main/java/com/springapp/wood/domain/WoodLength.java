@@ -8,18 +8,16 @@ package com.springapp.wood.domain;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
- ////     @Table(name="light_office", schema = "", catalog = "qjvmhoia_hmc")
-
-////     "light/office/" +   
-
-
-//@Entity
-//@Table(name="light_office_power", schema = "", catalog = "light_test")
-//@XmlRootElement
+@Entity
+@Table(name="wood_length", schema = "", catalog = "fanera")
+@XmlRootElement
 //@NamedQueries({
 //    @NamedQuery(name = "WoodThickness.findAll", query = "SELECT l FROM WoodThickness l"),
 //    @NamedQuery(name = "WoodThickness.findByPower", query = "SELECT l FROM WoodThickness l WHERE l.thickness = :thickness"),
@@ -32,6 +30,7 @@ public class WoodLength implements Serializable {
     @NotNull
     @Column(name = "length")
     private Integer length;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "num")

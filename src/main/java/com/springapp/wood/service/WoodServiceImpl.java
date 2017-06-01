@@ -10,8 +10,10 @@ import com.springapp.wood.domain.WoodLength;
 import com.springapp.wood.domain.WoodThickness;
 import com.springapp.wood.domain.WoodType;
 import com.springapp.wood.domain.WoodWidth;
+import com.springapp.wood.util.excel.ParserExcelWood;
 
 import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +30,17 @@ public class WoodServiceImpl implements WoodService {
     @Override 
     @Transactional
     public void uploadWood(String path, MultipartFile[] file) {
-//        for (int i = 0; i < file.length; i++) {
-//            try {
-//                File uploadFile = UploadMultipartFileUtilLight.uploadFile(path, file[i]);
-//                LightOffice lightOffice = ParserExcelLightOffice.readLightOffice(uploadFile);
-//                lightOfficeDao.saveLightOffice(lightOffice);
-//                uploadFile.delete();
-//                System.out.println("Successfully uploaded machine: " + file[i].getOriginalFilename());
-//            } catch (IOException e) {
-//                System.out.println("Failed to upload machine file: " + e.getMessage());
-//            }
-//        }
+        for (int i = 0; i < file.length; i++) {
+            try {
+                File uploadFile = UploadMultipartFileUtilLight.uploadFile(path, file[i]);
+                Wood wood = ParserExcelWood.readWood(uploadFile);
+                woodDao.saveWood(wood);
+                uploadFile.delete();
+                System.out.println("Successfully uploaded machine: " + file[i].getOriginalFilename());
+            } catch (IOException e) {
+                System.out.println("Failed to upload machine file: " + e.getMessage());
+            }
+        }
     }
     
     @Override
@@ -48,18 +50,10 @@ public class WoodServiceImpl implements WoodService {
         woodDao.saveWood(wood);
     }
 
-    private List<Wood> getFakeListWood(){
-        List<Wood> result = new ArrayList<>();
-//        result.add(new Wood("Raw plywood", "1250x1250x15_sanded_FK", "1250-1250-15-sanded-FK", 1250, 1250, 15, "sanded"));
-//        result.add(new Wood("Laminated particle board", "2750x1830x16_BukBavarija_109", "2750-1830-16-BukBavarija-109", 2750, 1830, 16, "Book Bavarija 109"));
-        return result;
-    }
-    
     @Override 
     @Transactional
     public List<Wood> getListWood() {
-        return getFakeListWood();
-//        return  lightOfficeDao.getListLightOffice();
+        return  woodDao.getListWood();
     }
     
     private List<WoodLength> getFakeListWoodLength(){
@@ -138,14 +132,7 @@ public class WoodServiceImpl implements WoodService {
     @Override 
     @Transactional
     public Wood getWoodByUrl(String url) {
-        
-        for(Wood wood : getFakeListWood())
-            if(wood.getUrl().equals(url))
-                return wood;
-        
-        return null;
-        
-//        return  lightOfficeDao.getLightByUrl(url);
+        return  woodDao.getWoodByUrl(url);
     }
     
     @Transactional
@@ -168,13 +155,7 @@ public class WoodServiceImpl implements WoodService {
     @Override 
     @Transactional
     public Wood getWoodById(String id) {
-        for (Wood wood : getFakeListWood()) 
-            if (wood.getId() == id) 
-                return wood;
-
-        return null;
-        
-//        return  lightOfficeDao.getLightById(id);
+        return  woodDao.getWoodById(id);
     }
     
     @Override 
@@ -205,16 +186,8 @@ public class WoodServiceImpl implements WoodService {
     
     @Override 
     @Transactional
-    public List<Wood> getListWoodFromSearch(String word) 
-    {
-        List<Wood> result = new ArrayList<Wood>();
-        for (Wood wood : getFakeListWood()) 
-            if(wood.getModel().contains(word))
-                result.add(wood);
-
-        return result;
-        
-//      return lightOfficeDao.getListLightFromSearch( word);
+    public List<Wood> getListWoodFromSearch(String word) {
+      return woodDao.getListWoodFromSearch( word);
     }
     
 }

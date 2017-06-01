@@ -20,8 +20,8 @@ public class LaminatedParticleBoard extends Wood {
     public LaminatedParticleBoard() {
     }
 
-    public LaminatedParticleBoard(String laminatedColor, String model, String url, int length, int width, int thickness) {
-        super(model, url, length, width, thickness);
+    public LaminatedParticleBoard(String laminatedColor, String id, String url, int length, int width, int thickness) {
+        super(id, url, length, width, thickness);
         this.laminatedColor = laminatedColor;
     }
 

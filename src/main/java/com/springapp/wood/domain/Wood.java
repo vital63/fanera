@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 //    @NamedQuery(name = "LightOffice.findAll",                       query = "SELECT l FROM LightOffice l"),
 //    @NamedQuery(name = "LightOffice.findById",                      query = "SELECT l FROM LightOffice l WHERE l.id = :id"),
 //    @NamedQuery(name = "LightOffice.findByType",                    query = "SELECT l FROM LightOffice l WHERE l.type = :type"),
-//    @NamedQuery(name = "LightOffice.findByModel",                   query = "SELECT l FROM LightOffice l WHERE l.model = :model"),
+//    @NamedQuery(name = "LightOffice.findByModel",                   query = "SELECT l FROM LightOffice l WHERE l.id = :id"),
 //    @NamedQuery(name = "LightOffice.findByUrl",                     query = "SELECT l FROM LightOffice l WHERE l.url = :url"),
 //    @NamedQuery(name = "LightOffice.findBySize",                    query = "SELECT l FROM LightOffice l WHERE l.size = :size"),
 //    @NamedQuery(name = "LightOffice.findByPrice",                   query = "SELECT l FROM LightOffice l WHERE l.price = :price"),
@@ -41,17 +41,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 public abstract class Wood implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    @Size(max = 255)
-    @Column(name = "id")
-    private String id;
 
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "model")
-    private String model;
+    @Column(name = "id")
+    private String id;
 
     @Basic(optional = false)
     @NotNull
@@ -120,12 +116,12 @@ public abstract class Wood implements Serializable {
     public Wood() {
     }
 
-    public Wood(String model) {
-        this.model = model;
+    public Wood(String id) {
+        this.id = id;
     }
 
-    public Wood(String model, String url, int length, int width, int thickness) {
-        this.model = model;
+    public Wood(String id, String url, int length, int width, int thickness) {
+        this.id = id;
         this.url = url;
         this.length = length;
         this.width = width;
@@ -138,14 +134,6 @@ public abstract class Wood implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public String getUrl() {
@@ -263,7 +251,7 @@ public abstract class Wood implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (model != null ? model.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -274,7 +262,7 @@ public abstract class Wood implements Serializable {
             return false;
         }
         Wood other = (Wood) object;
-        if ((this.model == null && other.model != null) || (this.model != null && !this.model.equals(other.model))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -282,7 +270,7 @@ public abstract class Wood implements Serializable {
 
     @Override
     public String toString() {
-        return "com.springapp.wood.domain.Wood[ model=" + model + " ]";
+        return "com.springapp.wood.domain.Wood[ id=" + id + " ]";
     }
     
     abstract public String getType();
