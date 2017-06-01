@@ -331,7 +331,7 @@
                                 <div class="body">
                                     <!--<div class="label-discount green">-10 % sale</div>-->
                                     <div class="title">
-                                        <a href="/wood-${wood.url}"> ${wood.id}  </a>
+                                        <a href="/wood-${wood.url}"> ${wood.name}  </a>
                                     </div>
                                     <div class="brand"><spring:message code="woodall.type" text="Type" />:  ${wood.type}</div>
                                         

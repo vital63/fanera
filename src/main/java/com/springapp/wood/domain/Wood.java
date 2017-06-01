@@ -274,4 +274,8 @@ public abstract class Wood implements Serializable {
     }
     
     abstract public String getType();
+    
+    public String getName(){
+        return id.replace("_", " ");
+    }
 }
