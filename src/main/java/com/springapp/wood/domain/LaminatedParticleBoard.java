@@ -33,8 +33,10 @@ public class LaminatedParticleBoard extends Wood {
         this.laminatedColor = laminatedColor;
     }
 
+    public static final String TYPE_NAME = "Laminated Particle Board";
+    
     @Override
     public String getType() {
-        return "Laminated Particle Board";
+        return TYPE_NAME;
     }
 }

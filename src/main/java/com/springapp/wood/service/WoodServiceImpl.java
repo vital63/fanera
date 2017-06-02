@@ -56,77 +56,41 @@ public class WoodServiceImpl implements WoodService {
         return  woodDao.getListWood();
     }
     
-    private List<WoodLength> getFakeListWoodLength(){
-        List<WoodLength> result = new ArrayList<WoodLength>();
-        result.add(new WoodLength(1250));
-        result.add(new WoodLength(1540));
-        result.add(new WoodLength(1840));
-        result.add(new WoodLength(2140));
-        result.add(new WoodLength(2440));
-        return result;
-    }
-    
     @Override 
     @Transactional
     public List<WoodLength> getListWoodLength() {
-        return getFakeListWoodLength();
-//        return  lightOfficeDao.getListLightOfficePower();
-    }
-    
-    private List<WoodWidth> getFakeListWoodWidth() {
-        List<WoodWidth> result = new ArrayList<WoodWidth>();
-        result.add(new WoodWidth(1250));
-        result.add(new WoodWidth(1540));
-        result.add(new WoodWidth(1840));
-        return result;
+        return  woodDao.getListWoodLength();
     }
     
     @Override 
     @Transactional
     public List<WoodWidth> getListWoodWidth(){
-        return getFakeListWoodWidth();
-//        return  lightOfficeDao.getListLightOfficeSize();
+        return  woodDao.getListWoodWidth();
     }
-    
-    private List<WoodThickness> getFakeListWoodThickness() {
-        List<WoodThickness> result = new ArrayList<WoodThickness>();
-        result.add(new WoodThickness(12));
-        result.add(new WoodThickness(14));
-        result.add(new WoodThickness(16));
-        return result;
-    }    
     
     @Override 
     @Transactional
     public List<WoodThickness> getListWoodThickness(){
-        return getFakeListWoodThickness();
-//        return  lightOfficeDao.getListLightOfficeSize();
-    }
-    
-    
-    private List<WoodType> getFakeListWoodType() {
-        List<WoodType> result = new ArrayList<WoodType>();
-        result.add(new WoodType("Laminated particle board"));
-        result.add(new WoodType("Raw plywood"));
-        return result;
+        return  woodDao.getListWoodThickness();
     }
     
     @Override 
     @Transactional
     public List<WoodType> getListWoodType() {
-        return getFakeListWoodType();
-//        return  lightOfficeDao.getListLightOfficeType();
+        return  woodDao.getListWoodType();
     }
     
     @Override 
     @Transactional
-    public List<Wood> getListWood(String length, String width, String thickness, String type){
-//        if (length == null && width == null && thickness == null && type == null)
+    public List<Wood> getListWood(String lengths, String widths, String thicknesses, String type){
+        if (lengths == null && widths == null && thicknesses == null && type == null)
             return getListWood();
-//        else
             
-//        String[] arrPowers = (powers != null) ? powers.split(",") : null;
-//        return  lightOfficeDao.getListLightOffice(emergency, arrPowers, size, type);
+        String[] arrLengths = (lengths != null) ? lengths.split(",") : null;
+        String[] arrWidths = (widths != null) ? widths.split(",") : null;
+        String[] arrThicknesses = (thicknesses != null) ? thicknesses.split(",") : null;
+        
+        return  woodDao.getListWood(arrLengths, arrWidths, arrThicknesses, type);
     }
     
     @Override 
@@ -164,6 +128,7 @@ public class WoodServiceImpl implements WoodService {
         woodDao.renewWoodLength();
         woodDao.renewWoodWidth();
         woodDao.renewWoodThickness();
+        woodDao.renewWoodType();
     }
 
 

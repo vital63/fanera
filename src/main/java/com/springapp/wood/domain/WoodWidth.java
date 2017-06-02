@@ -33,7 +33,7 @@ public class WoodWidth implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "num")
-    private Integer num;
+    private Long num;
 
     public WoodWidth() {
     }
@@ -42,7 +42,7 @@ public class WoodWidth implements Serializable {
         this.width = power;
     }
 
-    public WoodWidth(Integer power, Integer num) {
+    public WoodWidth(Integer power, Long num) {
         this.width = power;
         this.num = num;
     }
@@ -55,11 +55,11 @@ public class WoodWidth implements Serializable {
         this.width = width;
     }
 
-    public Integer getNum() {
+    public Long getNum() {
         return num;
     }
 
-    public void setNum(Integer num) {
+    public void setNum(Long num) {
         this.num = num;
     }
 

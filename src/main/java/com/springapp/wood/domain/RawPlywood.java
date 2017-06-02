@@ -57,8 +57,10 @@ public class RawPlywood extends Wood {
         this.isWaterResistance = isWaterResistance;
     }
 
+    public static final String TYPE_NAME = "Raw Plywood";
+    
     @Override
     public String getType() {
-        return "Raw Plywood";
+        return TYPE_NAME;
     }
 }

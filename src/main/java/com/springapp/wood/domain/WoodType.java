@@ -10,8 +10,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Home
  */
 @Entity
-@Table(name="light_office_type", schema = "", catalog = "light_test")
+@Table(name="wood_type", schema = "", catalog = "fanera")
 @XmlRootElement
 //@NamedQueries({
 //    @NamedQuery(name = "LightOfficeType.findAll", query = "SELECT l FROM LightOfficeType l"),
@@ -47,6 +45,11 @@ public class WoodType implements Serializable {
         this.type = type;
     }
 
+    public WoodType(String type, Integer num) {
+        this.type = type;
+        this.num = num;
+    }
+    
     public String getType() {
         return type;
     }

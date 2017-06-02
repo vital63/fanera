@@ -33,7 +33,7 @@ public class WoodThickness implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "num")
-    private Integer num;
+    private Long num;
 
     public WoodThickness() {
     }
@@ -42,7 +42,7 @@ public class WoodThickness implements Serializable {
         this.thickness = power;
     }
 
-    public WoodThickness(Integer power, Integer num) {
+    public WoodThickness(Integer power, Long num) {
         this.thickness = power;
         this.num = num;
     }
@@ -55,11 +55,11 @@ public class WoodThickness implements Serializable {
         this.thickness = thickness;
     }
 
-    public Integer getNum() {
+    public Long getNum() {
         return num;
     }
 
-    public void setNum(Integer num) {
+    public void setNum(Long num) {
         this.num = num;
     }
 

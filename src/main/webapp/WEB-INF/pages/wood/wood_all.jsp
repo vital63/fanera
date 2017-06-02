@@ -114,7 +114,7 @@
             <!--  Type  -->      
             <c:if test="${!empty listWoodType}" >               
                 <div class="category-filter">
-                    <h2><spring:message code="lightall.type" text="Type" /> </h2   >
+                    <h2><spring:message code="woodall.type" text="Type" /> </h2   >
                         
                     <ul>
                         <c:forEach items="${listWoodType}" var="aa">
