@@ -278,4 +278,16 @@ public abstract class Wood implements Serializable {
     public String getName(){
         return id.replace("_", " ");
     }
+    
+    public static Class getClassByTypeName(String type) {
+        switch (type) 
+        {
+            case RawPlywood.TYPE_NAME: 
+                return RawPlywood.class;
+            case LaminatedParticleBoard.TYPE_NAME: 
+                return LaminatedParticleBoard.class;
+            default:
+                return Wood.class;
+        }
+    }
 }

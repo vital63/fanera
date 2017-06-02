@@ -110,162 +110,94 @@
         
         <form:form id="filterForm" action="/wood" method="GET">
             
-            
-            <!--  Type  -->      
-            <c:if test="${!empty listWoodType}" >               
+            <!-- Wood type-->
+            <c:if test="${!empty listWoodType}">
                 <div class="category-filter">
-                    <h2><spring:message code="woodall.type" text="Type" /> </h2   >
-                        
+                    <h2><spring:message code="woodall.type" text="Type" /></h2>
+                    <!--<hr>-->
                     <ul>
-                        <c:forEach items="${listWoodType}" var="aa">
+                        <c:forEach items="${listWoodType}" var="type">
                             <li>
-                                <a  
-                                    <c:if test="${aa.type != type}">style="color: #9f9f9f;" </c:if>   
-                                    <c:if test="${aa.type == type}">style="color: #60c011;" </c:if>   
-                                    href="/wood?type=${aa.type}">   ${aa.type} (${aa.num})</a>  
-                                <br/>   
+                                <input class="le-checkbox" name="types" type="checkbox" value="${type.type}" 
+                                       <c:forEach items="${types}" var="t">
+                                           <c:if test="${type.type==t}">checked</c:if> 
+                                       </c:forEach>
+                                />
+                                        
+                                <label>${type.type}(${type.num})</label>
                             </li>
-                                
-                        </c:forEach>  
-                            
-                        <input type="hidden" name="type" value="${type}"/>   
-                            
+                        </c:forEach>
                     </ul>
-                </div>                 
-            </c:if>             
- 
+                </div>
+            </c:if>
          
-        
-            <!-- Light Office Power-->
-            <c:if test="${!empty listLightPower}">
+            <!-- Wood length-->
+            <c:if test="${!empty listWoodLength}">
                 <div class="category-filter">
-                    <h2><spring:message code="lightall.power" text="Power" /></h2>
-                       <!--<hr>-->
+                    <h2><spring:message code="woodall.length" text="Length" /></h2>
+                    <!--<hr>-->
                     <ul>
-                        <c:forEach items="${listLightPower}" var="power">
+                        <c:forEach items="${listWoodLength}" var="length">
                             <li>
-                                           <input class="le-checkbox" 
-                                           <c:forTokens items="${powers}" delims="," var="role">
-                                                 <c:if test="${power.power==role}">checked</c:if> 
-                                            </c:forTokens>
-                                     name="powers" type="checkbox" value="${power.power}"/>
-                                
-                                <label>${power.power} 
-                                   <spring:message code="lightall.watt" text="watt" />  
-                                    (${power.num})  </label>
+                                <input class="le-checkbox" name="lengths" type="checkbox" value="${length.length}" 
+                                       <c:forEach items="${lengths}" var="l">
+                                           <c:if test="${length.length==l}">checked</c:if> 
+                                       </c:forEach>
+                                />
+                                        
+                                <label>${length.length}<spring:message code="woodall.mm" text="mm" />(${length.num})</label>
                             </li>
                         </c:forEach>
                     </ul>
                 </div>
-          
             </c:if>
-
-           
-                           <!--Amount of axes -->      
-                <c:if test="${!empty listLightSize}" >               
+         
+            <!-- Wood width-->
+            <c:if test="${!empty listWoodWidth}">
                 <div class="category-filter">
-                            <h2> <spring:message code="lightall.size" text="Size" /> </h2>
-                             <!--<hr>--> 
-                             <div id="item-count" class="le-select">
-                                 <select name="size">  
-                                     <option value= ><spring:message code="lightall.size_not_selected" text="Size not selected" /></option> 
-                                          <!--<option disabled>Select axes</option>-->  
-                                          <c:forEach items="${listLightSize}" var="aa">
-                                              <option value="${aa.size}"
-                                                         <c:if test="${aa.size == size}">selected</c:if>                 
-                                                  > ${aa.size} (${aa.num}) </option>
-                                          </c:forEach>
-                                 </select>
-                            </div>
-                        </div> 
-           
-            </c:if>
-                 
-            
-            <!--X-->   
-            <c:if test="${!empty listVmcX}" >
-                <div class="category-filter">
-                            <!--<h2><spring:message code="vmcs.travelx" text="X, mm" /> </h2>-->
-                            <!--<hr>-->
-                             <div id="item-count" class="le-select">
-                             
-                                 <select name="x">  
-                                     <option value= >X not selected</option> 
-                                          <!--<option disabled>Select X</option>-->  
-                                          <c:forEach items="${listVmcX}" var="xx">
-                                              <option value="${xx.xforsql}"
-                                                         <c:if test="${xx.xforsql == x}">selected</c:if>                 
-                                                  >${xx.x} mm </option>
-                                          </c:forEach>
-                                 </select>
-                            </div>
-                        </div> 
-             <hr>    
-            </c:if>
-          
-          
-          
-            <!--Y-->  
-            <c:if test="${!empty listVmcY}" >
-                    <div class="category-filter">
-                            <!--<h2><spring:message code="vmcs.travely" text="Y, mm" /> </h2>-->
-                                 <div id="item-count" class="le-select">
-                                     <select name="y">  
-                                         <!--<option disabled>Select Y</option>-->  
-                                         <option value= >Y not selected</option> 
-                                              <c:forEach items="${listVmcY}" var="yy">
-                                                    <option value="${yy.yforsql}"
-                                                        <c:if test="${yy.yforsql == y}">selected</c:if>                 
-                                                    > ${yy.y} mm </option>
-                                              </c:forEach>
-                                     </select>
-                                </div>
-                    </div> 
-            <hr>    
-            </c:if>
-          
-           <!--Z-->  
-            <c:if test="${!empty listVmcZ}" >
-                    <div class="category-filter">
-                            <!--<h2><spring:message code="vmcs.travely" text="Z, mm" /> </h2>-->
-                                 <div id="item-count" class="le-select">
-                                     <select name="z" >  
-                                         <!--<option disabled>Select Y</option>-->  
-                                         <option value= >Z not selected</option> 
-                                              <c:forEach items="${listVmcZ}" var="zz">
-                                                    <option value="${zz.zforsql}"
-                                                        <c:if test="${zz.zforsql == z}">selected</c:if>                 
-                                                    >${zz.z} mm </option>
-                                              </c:forEach>
-                                     </select>
-                                </div>
-                    </div> 
-            <hr>    
-            </c:if>
-            
-        
-          
-            <!-- location -->
-            <c:if test="${!empty listVmcLocation}">
-                <div class="category-filter">
-                    <h2><spring:message code="vmc.machinelocation" text="machinelocation"/></h2>
+                    <h2><spring:message code="woodall.width" text="Width" /></h2>
+                    <!--<hr>-->
                     <ul>
-                        <c:forEach items="${listVmcLocation}" var="location">
-                            <li><input class="le-checkbox" name="locations" type="checkbox"
-                                          <c:forTokens items="${locations}" delims="," var="role">
-                                                 <c:if test="${location.location==role}">checked</c:if> 
-                                            </c:forTokens>
-                                       value="${location.location}"/>
-                                <label>${location.location} (${location.num})</label></li>
+                        <c:forEach items="${listWoodWidth}" var="width">
+                            <li>
+                                <input class="le-checkbox" name="widths" type="checkbox" value="${width.width}" 
+                                       <c:forEach items="${widths}" var="w">
+                                           <c:if test="${width.width==w}">checked</c:if> 
+                                       </c:forEach>
+                                />
+                                        
+                                <label>${width.width}<spring:message code="woodall.mm" text="mm" />(${width.num})</label>
+                            </li>
                         </c:forEach>
                     </ul>
                 </div>
-            <hr>
             </c:if>
 
+            <!-- Wood thickness-->
+            <c:if test="${!empty listWoodThickness}">
+                <div class="category-filter">
+                    <h2><spring:message code="woodall.thickness" text="Thickness" /></h2>
+                    <!--<hr>-->
+                    <ul>
+                        <c:forEach items="${listWoodThickness}" var="thickness">
+                            <li>
+                                <input class="le-checkbox" name="thicknesses" type="checkbox" value="${thickness.thickness}" 
+                                       <c:forEach items="${thicknesses}" var="t">
+                                           <c:if test="${thickness.thickness==t}">checked</c:if> 
+                                       </c:forEach>
+                                />
+                                        
+                                <label>${thickness.thickness}<spring:message code="woodall.mm" text="mm" />(${thickness.num})</label>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </c:if>
+
+                
             <br/>
             <button class="le-button small">
-              <spring:message code="lightall.filter" text="Filter Light" /> 
+                <spring:message code="lightall.filter" text="Filter Light" /> 
             </button>   
             
          </form:form>  
@@ -389,7 +321,7 @@
                 
    
                 
-         <c:if test="${!empty listLightOffice}">      
+         <c:if test="${!empty listWood}">      
                 <div class="pagination-holder">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 text-left">

@@ -6,6 +6,9 @@ import com.springapp.mvc.util.PrintInFile;
 import com.springapp.wood.service.WoodService;
 
 import com.springapp.wood.domain.Wood;
+import com.springapp.wood.util.Utils;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,29 +27,32 @@ public class ControllerWood extends PrintInFile {
     WoodService woodService;
  
     @RequestMapping(value = "/wood", method = RequestMethod.GET)
-    public ModelAndView wood_all(@RequestParam(value = "length", required = false) String length,
-                                 @RequestParam(value = "width", required = false) String width,
-                                 @RequestParam(value = "thickness", required = false) String thickness,
-                                 @RequestParam(value = "type", required = false) String type,
+    public ModelAndView wood_all(@RequestParam(value = "types", required = false) String types,
+                                 @RequestParam(value = "lengths", required = false) String lengths,
+                                 @RequestParam(value = "widths", required = false) String widths,
+                                 @RequestParam(value = "thicknesses", required = false) String thicknesses,
                                  HttpSession session ) {
-        
         ModelAndView mv = new ModelAndView("wood/wood_all"); 
         
-        mv.addObject("listWood", woodService.getListWood(length, width, thickness, type));
+        mv.addObject("listWood", woodService.getListWood(lengths, widths, thicknesses, types));
         mv.addObject("listWoodType", woodService.getListWoodType()); //  for   filter
+        mv.addObject("listWoodLength", woodService.getListWoodLength()); //  for   filter
+        mv.addObject("listWoodWidth", woodService.getListWoodWidth()); //  for   filter
+        mv.addObject("listWoodThickness", woodService.getListWoodThickness()); //  for   filter
 
-        mv.addObject("length", length); // it is need for feed back !!!!!!
-        mv.addObject("width", width); // it is need for feed back !!!!!!
-        mv.addObject("thickness", thickness); // it is need for feed back !!!!!!
-        mv.addObject("type", type); // it is need for feed back !!!!!!
+        mv.addObject("types", Utils.stringDelimToListString(types)); // it is need for feed back !!!!!!
+        mv.addObject("lengths", Utils.stringDelimToListInt(lengths)); // it is need for feed back !!!!!!
+        mv.addObject("widths", Utils.stringDelimToListInt(widths)); // it is need for feed back !!!!!!
+        mv.addObject("thicknesses", Utils.stringDelimToListInt(thicknesses)); // it is need for feed back !!!!!!
+        
         mv.addObject("message", new Message()); // it is need for feed back !!!!!!
         session.setAttribute("search", "plywood"); // for search
 
         String params = "" ;
-        if (length!=null) params += "&length=" + length;
-        if (width!=null) params += "&width=" + width;
-        if (thickness!=null && !thickness.equals("")) params += "&thickness=" + thickness;
-        if (type!=null && !type.equals("")) params += "&type=" + type;
+        if (lengths!=null) params += "&length=" + lengths;
+        if (widths!=null) params += "&width=" + widths;
+        if (thicknesses!=null && !thicknesses.equals("")) params += "&thickness=" + thicknesses;
+        if (types!=null && !types.equals("")) params += "&type=" + types;
         session.setAttribute("currentpagewithpage", "/wood?" + params);
           
         return mv;

@@ -10,6 +10,7 @@ import com.springapp.wood.domain.WoodLength;
 import com.springapp.wood.domain.WoodThickness;
 import com.springapp.wood.domain.WoodType;
 import com.springapp.wood.domain.WoodWidth;
+import com.springapp.wood.util.Utils;
 import com.springapp.wood.util.excel.ParserExcelWood;
 
 import java.io.IOException;
@@ -86,11 +87,12 @@ public class WoodServiceImpl implements WoodService {
         if (lengths == null && widths == null && thicknesses == null && type == null)
             return getListWood();
             
-        String[] arrLengths = (lengths != null) ? lengths.split(",") : null;
-        String[] arrWidths = (widths != null) ? widths.split(",") : null;
-        String[] arrThicknesses = (thicknesses != null) ? thicknesses.split(",") : null;
+        List<Integer> listLengths = Utils.stringDelimToListInt(lengths);
+        List<Integer> listWidths = Utils.stringDelimToListInt(widths);
+        List<Integer> listThicknesses = Utils.stringDelimToListInt(thicknesses);
+        List<String> listTypes = Utils.stringDelimToListString(type);
         
-        return  woodDao.getListWood(arrLengths, arrWidths, arrThicknesses, type);
+        return woodDao.getListWood(listLengths, listWidths, listThicknesses, listTypes);
     }
     
     @Override 

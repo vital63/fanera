@@ -13,14 +13,12 @@ import com.springapp.wood.domain.WoodLength;
 import com.springapp.wood.domain.WoodWidth;
 import com.springapp.wood.domain.WoodThickness;
 import com.springapp.wood.domain.WoodType;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -94,23 +92,36 @@ public class WoodDaoImpl implements WoodDao{
     }
     
     @Override
-    @SuppressWarnings("unchecked") //TODO refactor params
-    public List<Wood> getListWood(String[] arLengths, String[] arWidths, String[] arThicknesses, String arType)
+    @SuppressWarnings("unchecked") 
+    public List<Wood> getListWood(List<Integer> listLengths, List<Integer> listWidths, 
+            List<Integer> listThicknesses, List<String> listTypes)
     {
-        Criteria crit = sessionFactory.getCurrentSession().createCriteria(Wood.class);
+        if(listTypes == null)
+            return getListWoodForClass(listLengths, listWidths, listThicknesses, Wood.class);
         
-        if (arLengths != null && !arLengths[0].isEmpty())   
-            crit.add(Restrictions.in("length", arLengths));
-        
-        if (arWidths != null && !arWidths[0].isEmpty())   
-            crit.add(Restrictions.in("width", arWidths));
-        
-        if (arThicknesses != null && !arThicknesses[0].isEmpty())   
-            crit.add(Restrictions.in("thickness", arThicknesses));
-        
-        if (arType != null && !arType.isEmpty()) 
-            crit.add(Restrictions.eq("type", arType));
-        
+        List<Wood> result = new ArrayList<>();
+        for(String type: listTypes)
+        {
+            Class filterClass = Wood.getClassByTypeName(type);
+            result.addAll(getListWoodForClass(listLengths, listWidths, listThicknesses, filterClass));
+        }
+        return result;
+    }
+
+    private List<Wood> getListWoodForClass(List<Integer> listLengths, List<Integer> listWidths, 
+            List<Integer> listThicknesses, Class filterClass)
+    {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(filterClass);
+
+        if (listLengths != null) 
+            crit.add(Restrictions.in("length", listLengths));
+
+        if (listWidths != null) 
+            crit.add(Restrictions.in("width", listWidths));
+
+        if (listThicknesses != null) 
+            crit.add(Restrictions.in("thickness", listThicknesses));
+
         return crit.list();
     }
     

@@ -18,7 +18,7 @@ import java.util.List;
 public interface WoodDao {
     
     public List<Wood> getListWood();
-    public List<Wood> getListWood(String[] lengths, String[] widths, String[] thicknesses, String type);
+    public List<Wood> getListWood(List<Integer> listLengths, List<Integer> listWidths, List<Integer> listThicknesses, List<String> types);
     public Wood getWoodByUrl(String url);
     public Wood getWoodById(String id);
     
