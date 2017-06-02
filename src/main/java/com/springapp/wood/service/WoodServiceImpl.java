@@ -161,9 +161,9 @@ public class WoodServiceImpl implements WoodService {
     @Override 
     @Transactional
     public void renewFiltersWoods() {
-//        lightOfficeDao.renewLightOfficePower();
-//        lightOfficeDao.renewLightOfficeSize();
-//        lightOfficeDao.renewLightOfficeType();
+        woodDao.renewWoodLength();
+        woodDao.renewWoodWidth();
+        woodDao.renewWoodThickness();
     }
 
 

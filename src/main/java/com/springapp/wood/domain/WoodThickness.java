@@ -15,11 +15,6 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
- ////     @Table(name="light_office", schema = "", catalog = "qjvmhoia_hmc")
-
-////     "light/office/" +   
-
-
 @Entity
 @Table(name="wood_thickness", schema = "", catalog = "fanera")
 @XmlRootElement

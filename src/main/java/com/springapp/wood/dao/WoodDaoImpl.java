@@ -11,11 +11,15 @@ import com.springapp.wood.domain.WoodLength;
 import com.springapp.wood.domain.WoodWidth;
 import com.springapp.wood.domain.WoodThickness;
 import com.springapp.wood.domain.WoodType;
+import java.util.Collections;
+import java.util.HashSet;
 
 
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -97,27 +101,40 @@ public class WoodDaoImpl implements WoodDao{
 //        if (type != null && !type.equals(""))  crit.add(Restrictions.eq("type", type));
         return crit.list();
     }
-
     
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Wood> getListWoodByIds(String[] idsArr) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Wood.class);
+        if (idsArr != null && !idsArr[0].equals("")) {
+            criteria.add(Restrictions.in("id", idsArr));
+        }
+        return criteria.list();
+    }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Wood> getListWoodFromSearch(String word) {
+        return sessionFactory.getCurrentSession().createQuery("from Wood where id LIKE '%" + word + "%' ORDER BY id DESC").list();
+    }
 
     
     @Override
     @SuppressWarnings("unchecked")
     public void renewWoodLength(){
-//        renewWoodFilter(WoodLength.class.getSimpleName(), "office", "power");
+        renewWoodFilter(WoodLength.class.getSimpleName(), "length");
     }
     
     @Override
     @SuppressWarnings("unchecked")
     public void renewWoodWidth(){
-//        renewWoodFilter(WoodWidth.class.getSimpleName(), "office", "power");
+        renewWoodFilter(WoodWidth.class.getSimpleName(), "width");
     }
     
     @Override
     @SuppressWarnings("unchecked")
     public void renewWoodThickness(){
-//        renewWoodFilter(WoodThickness.class.getSimpleName(), "office", "power");
+        renewWoodFilter(WoodThickness.class.getSimpleName(), "thickness");
     }
 
     @Override
@@ -126,85 +143,25 @@ public class WoodDaoImpl implements WoodDao{
 //        renewWoodFilter(WoodType.class.getSimpleName(), "all", "type");
     }
 
-    
-    @Override
     @SuppressWarnings("unchecked")
-    public List<Wood> getListWoodByIds(String [] idsArr){
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Wood.class);
-        if (idsArr != null && !idsArr[0].equals("") )   criteria.add(Restrictions.in("id",  idsArr));
-            return criteria.list(); 
-    } 
-    
-    @Override 
-    @SuppressWarnings("unchecked")
-    public List<Wood> getListWoodFromSearch(String word){
-        return sessionFactory.getCurrentSession().createQuery("from Wood where id LIKE '%" + word + "%' ORDER BY id DESC").list();
-    } 
-    
-    @SuppressWarnings("unchecked")
-    private void renewWoodFilter(String className, String typeWood, String checkBoxName) {
-//        Session session = sessionFactory.getCurrentSession();
-//        session.createQuery("delete from " + className).executeUpdate();
-//        List<String> list;
-//        if(typeWood.equals("all"))  
-//            list = session.createQuery("select M." + checkBoxName + " from Wood M").list();
-//        else  
-//            list = session.createQuery("select M." + checkBoxName + " from Wood M where type='"+typeWood+"'").list();
-//
-//               
-//        for (int i = 0; i < list.size(); i++) {
-//            list.set(i, list.get(i).toLowerCase());
-//        }
-//        
-//        Set<String> set = new HashSet<String>();
-//        for(String val : list) {
-//            set.add(val);
-//        }
-//        
-//        if(className.equals(WoodPower.class.getSimpleName())) {
-//            for (String s : set) {
-//                session.save(getWoodPower((Integer.parseInt(s)) , Collections.frequency(list, s)));
-//            }
-//        } else if(className.equals(WoodSize.class.getSimpleName())) {
-//            for (String s : set) {
-//                session.save(getWoodSize(s, Collections.frequency(list, s)));
-//            }
-//        }
-//        else if(className.equals(WoodType.class.getSimpleName())){
-//            for (String s : set) {
-//                session.save(getWoodType(s, Collections.frequency(list, s)));
-//            }
-//        }
+    private void renewWoodFilter(String className, String checkBoxName) {
+        Session session = sessionFactory.getCurrentSession();
+        session.createQuery("delete from " + className).executeUpdate();
+        
+        List<Integer> list = session.createQuery("select M." + checkBoxName + " from Wood M").list();
+        Set<Integer> set = new HashSet<>(list);
+        
+        if(className.equals(WoodLength.class.getSimpleName())) {
+            for (Integer i : set) 
+                session.save(new WoodLength(i, Collections.frequency(list, i)));
+        } 
+        else if(className.equals(WoodWidth.class.getSimpleName())) {
+            for (Integer i : set) 
+                session.save(new WoodWidth(i, Collections.frequency(list, i)));
+        }
+        else if(className.equals(WoodThickness.class.getSimpleName())){
+            for (Integer i : set) 
+                session.save(new WoodThickness(i, Collections.frequency(list, i)));
+        }
     }
-
-  
-    
-    private WoodLength getWoodLength(int val, int num) {
-        WoodLength woodLength = new WoodLength();
-        woodLength.setLength(val);
-        woodLength.setNum(num);
-        return woodLength;
-    }
-    
-    private WoodWidth getWoodSize(int val, int num) {
-        WoodWidth woodWidth = new WoodWidth();
-        woodWidth.setWidth(val);
-        woodWidth.setNum(num);
-        return woodWidth;
-    }
-    
-    private WoodThickness getWoodThickness(int val, int num) {
-        WoodThickness woodThickness = new WoodThickness();
-        woodThickness.setThickness(val);
-        woodThickness.setNum(num);
-        return woodThickness;
-    }
-    
-    private WoodType getWoodType(String val, int num) {
-        WoodType woodType = new WoodType();
-        woodType.setType(val);
-        woodType.setNum(num);
-        return woodType;
-    }
-    
 }
