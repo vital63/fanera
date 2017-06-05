@@ -299,14 +299,14 @@
                                         <div class="value">${wood.thickness}</div>
                                     </li>
                                     
-                                    <c:if test="${wood.type=="Laminated Particle Board"}">
+                                    <c:if test="${wood.laminatedParticleBoard}">
                                         <li>
                                             <label><spring:message code="woodone.laminated_color" text="Laminated color"/></label>
                                             <div class="value">${wood.laminatedColor}</div>
                                         </li>
                                     </c:if>
                                         
-                                    <c:if test="${wood.type=="Raw Plywood"}">
+                                    <c:if test="${wood.rawPlywood}">
                                         <li>    
                                             <label><spring:message code="woodone.grade" text="Grade"/></label>
                                             <div class="value">${wood.grade}</div>

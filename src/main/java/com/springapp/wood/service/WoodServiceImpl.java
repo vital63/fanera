@@ -25,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Service 
 public class WoodServiceImpl implements WoodService {
 
-        
     @Autowired WoodDao woodDao;
     
     @Override 
@@ -138,17 +137,7 @@ public class WoodServiceImpl implements WoodService {
     @Transactional
     public List<Wood> getListWoodByIds(String ids) {
         String[] idsArr = (ids != null) ? ids.split(",") : null;
-        if(idsArr == null)
-            return null;
-        
-        List<Wood> result = new ArrayList<Wood>();
-        for (String ids1 : idsArr) 
-            result.add(getWoodById(ids1));
-
-        return result;
-        
-//        String[] idsArr = (ids != null) ? ids.split(",") : null;
-//        return lightOfficeDao.getListLighByIds(idsArr);
+        return woodDao.getListWoodByIds(idsArr);
     }
     
     @Override 

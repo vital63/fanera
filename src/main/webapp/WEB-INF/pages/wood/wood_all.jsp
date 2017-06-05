@@ -18,7 +18,7 @@
         <meta name="keywords" content="Deckel mano, mori seiki, haas, cnc machines for sale, horizontal milling machine for sale, buy cnc machine, vertical milling machine for sale, cnc machine price, cnc machine cost, buy cnc machine, cnc machining center for sale ">
         <meta name="robots" content="all">
 
-        <title><spring:message code="lightall.title" text="Light" /></title>
+        <title><spring:message code="woodall.title" text="Plywood" /></title>
 
         <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="../resources/assets/css/bootstrap.min.css">
@@ -197,7 +197,7 @@
                 
             <br/>
             <button class="le-button small">
-                <spring:message code="lightall.filter" text="Filter Light" /> 
+                <spring:message code="woodall.filter" text="Filter" /> 
             </button>   
             
          </form:form>  
@@ -286,7 +286,7 @@
                                     </div>
                                     <div class="wish-compare">
                                         <!--<a class="btn-add-to-wishlist" href="add-product-to-wish-list?id=${vmc.id}">add to wishlist</a>-->
-                                        <a class="btn-add-to-compare" href="/compare-light-add?id=${light.id}&pagereturn=${currentpagewithpage}"><spring:message code="lightall.compare" text="Compare" /></a>
+                                        <a class="btn-add-to-compare" href="/compare-wood-add?id=${wood.id}&pagereturn=${currentpagewithpage}"><spring:message code="woodall.compare" text="Compare" /></a>
                                     </div>
                                 </div>
                                 

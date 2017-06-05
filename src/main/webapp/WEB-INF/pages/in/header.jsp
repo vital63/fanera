@@ -97,30 +97,6 @@
     </div>
 </c:if>
 
-<c:if test="${compareCartHmc.numberOfItems>0}" >
-    <div class="compare">
-        <a href="/compare-hmc">
-            <i class="fa fa-exchange"></i> HMC <span class="value">${compareCartHmc.numberOfItems}</span>
-        </a>
-    </div>
-</c:if>
-
-<c:if test="${compareCartLathe.numberOfItems>0}" >
-    <div class="compare">
-        <a href="/compare-lathe">
-            <i class="fa fa-exchange"></i> Lathe <span class="value">${compareCartLathe.numberOfItems}</span> 
-        </a>
-    </div>
-</c:if>
-
-<c:if test="${compareCartRadiator.numberOfItems>0}" >
-    <div class="compare">
-        <a href="/compare-radiator">
-            <i class="fa fa-exchange"></i> Radiator <span class="value">${compareCartRadiator.numberOfItems}</span> 
-        </a>
-    </div>
-</c:if>
-
 <c:if test="${compareCartLight.numberOfItems>0}" >
     <div class="compare">
         <a href="/compare-light">
@@ -129,13 +105,14 @@
     </div>
 </c:if>
 
-<c:if test="${compareCartApartment.numberOfItems>0}" >
+<c:if test="${compareCartWood.numberOfItems>0}" >
     <div class="compare">
-        <a href="/compare-apartment">
-            <i class="fa fa-exchange"></i> House <span class="value">${compareCartApartment.numberOfItems}</span> 
+        <a href="/compare-wood">
+            <i class="fa fa-exchange"></i> Wood <span class="value">${compareCartWood.numberOfItems}</span> 
         </a>
     </div>
 </c:if>
+
 <!--    <div class="compare">
         <a href="compare"><i class="fa fa-exchange"></i> HMC <span class="value">${compareCart.numberOfItems}</span> </a>    
     </div>-->

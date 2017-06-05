@@ -6,6 +6,7 @@
 package com.springapp.wood.domain;
 
 import java.io.Serializable;
+import java.util.Locale;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -145,7 +146,7 @@ public abstract class Wood implements Serializable {
     }
 
     public String getPhoto1() {
-        return "wood/office/" +   photo1;
+        return "wood/" +   photo1;
     }
 
     public void setPhoto1(String photo1) {
@@ -153,7 +154,7 @@ public abstract class Wood implements Serializable {
     }
 
     public String getPhoto2() {
-        return "wood/office/" +   photo2;
+        return "wood/" +   photo2;
     }
 
     public void setPhoto2(String photo2) {
@@ -161,7 +162,7 @@ public abstract class Wood implements Serializable {
     }
 
     public String getPhoto3() {
-        return "wood/office/" +   photo3;
+        return "wood/" +   photo3;
     }
 
     public void setPhoto3(String photo3) {
@@ -169,7 +170,7 @@ public abstract class Wood implements Serializable {
     }
 
     public String getPhoto4() {
-        return "light/office/" + photo4;
+        return "wood/" + photo4;
     }
 
     public void setPhoto4(String photo4) {
@@ -177,7 +178,7 @@ public abstract class Wood implements Serializable {
     }
 
     public String getPhoto5() {
-        return "light/office/" + photo5;
+        return "wood/" + photo5;
     }
 
     public void setPhoto5(String photo5) {
@@ -192,6 +193,21 @@ public abstract class Wood implements Serializable {
         this.descriptionEn = descriptionEn;
     }
 
+    public String getDescriptionRu() {
+        return descriptionRu;
+    }
+
+    public void setDescriptionRu(String descriptionRu) {
+        this.descriptionRu = descriptionRu;
+    }
+
+    public String getDescription(Locale locale){
+        if (locale.toString().equals("russia"))
+            return descriptionRu;
+        else    
+            return descriptionEn;
+    }
+    
     public int getLength() {
         return length;
     }
@@ -222,14 +238,6 @@ public abstract class Wood implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public String getDescriptionRu() {
-        return descriptionRu;
-    }
-
-    public void setDescriptionRu(String descriptionRu) {
-        this.descriptionRu = descriptionRu;
     }
 
     public int getNumBoardsInPackage() {
@@ -289,5 +297,14 @@ public abstract class Wood implements Serializable {
             default:
                 return Wood.class;
         }
+    }
+    
+    public boolean isRawPlywood(){
+        System.out.println("this instanceof RawPlywood: " + (this instanceof RawPlywood));
+        return this instanceof RawPlywood;
+    }
+
+    public boolean isLaminatedParticleBoard(){
+        return this instanceof LaminatedParticleBoard;
     }
 }

@@ -46,7 +46,7 @@ public class ParserExcelWood  {
             Iterator<Row> rowIterator = firstSheet.iterator();
             DataFormatter df = new DataFormatter();
 
-            String id = df.formatCellValue(rowIterator.next().getCell(1)).trim();
+            String id = getId(df.formatCellValue(rowIterator.next().getCell(1)).trim());
             printInFile("readWood.txt", "1");
 
             Wood wood;
@@ -87,24 +87,33 @@ public class ParserExcelWood  {
         }
     }
     
+    
     private static String getUrl(String str){
-        return str.replaceAll(" ",  "-")
-                .replaceAll("'",    "-")
-                .replaceAll("\"",   "-")
-                .replaceAll(",",    "-")
-                .replaceAll(":",    "-")
-                .replaceAll(";",    "-")
-                .replaceAll("\\.",  "-")
-                .replaceAll("&",    "-")
-                .replaceAll("/",    "-")
-                .replaceAll("\\|",  "-") // ??
-                .replaceAll("!",    "-")
-                .replaceAll("\\?",  "-")
-                .replaceAll("\\(",  "-")
-                .replaceAll("\\)",  "-")
-                .replaceAll("---",  "-")
-                .replaceAll("--",   "-")
-                .replaceAll("--",   "-");
+        return replaceSpecStringsBySubstring(str, "-");
+    }
+    
+    private static String getId(String str){
+        return replaceSpecStringsBySubstring(str, "_");
+    }
+    
+    private static String  replaceSpecStringsBySubstring(String str, String substring){
+        return str.replaceAll(" ",  substring)
+                .replaceAll("'",    substring)
+                .replaceAll("\"",   substring)
+                .replaceAll(",",    substring)
+                .replaceAll(":",    substring)
+                .replaceAll(";",    substring)
+                .replaceAll("\\.",  substring)
+                .replaceAll("&",    substring)
+                .replaceAll("/",    substring)
+                .replaceAll("\\|",  substring) // ??
+                .replaceAll("!",    substring)
+                .replaceAll("\\?",  substring)
+                .replaceAll("\\(",  substring)
+                .replaceAll("\\)",  substring)
+                .replaceAll("---",  substring)
+                .replaceAll("--",   substring)
+                .replaceAll("--",   substring);
     }
     
     private static int intFromCell (Iterator<Row> rowIterator, DataFormatter df ){
