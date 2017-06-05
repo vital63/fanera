@@ -172,7 +172,7 @@
                                 <tr class="comparison-item description">
                                     <th><spring:message code="woodall.length" text="Length"/></th>
                                         <c:forEach items="${listWood}" var="wood">
-                                        <td class="comparison-item-cell odd product_39">
+                                        <td class="comparison-item-cell odd product_39" style=${wood.preferences.length ? "background:#FEC" : ""} >
                                             <p> ${wood.length} </p>
                                         </td>
                                     </c:forEach>
@@ -181,7 +181,7 @@
                                 <tr class="comparison-item description">
                                     <th><spring:message code="woodall.width" text="Width"/></th>
                                         <c:forEach items="${listWood}" var="wood">
-                                        <td class="comparison-item-cell odd product_39">
+                                        <td class="comparison-item-cell odd product_39" style=${wood.preferences.width ? "background:#FEC" : ""}>
                                             <p> ${wood.width} </p>
                                         </td>
                                     </c:forEach>
@@ -190,7 +190,7 @@
                                 <tr class="comparison-item description">
                                     <th><spring:message code="woodall.thickness" text="Thickness"/></th>
                                         <c:forEach items="${listWood}" var="wood">
-                                        <td class="comparison-item-cell odd product_39">
+                                        <td class="comparison-item-cell odd product_39" style=${wood.preferences.thickness ? "background:#FEC" : ""}>
                                             <p> ${wood.thickness} </p>
                                         </td>
                                     </c:forEach>

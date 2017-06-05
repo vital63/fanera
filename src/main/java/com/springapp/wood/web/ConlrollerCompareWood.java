@@ -35,11 +35,13 @@ public class ConlrollerCompareWood {
     public ModelAndView compareWoodWithID( @RequestParam(value = "ids", required = false) String ids, HttpSession session)
     {
         ModelAndView mv = new ModelAndView("wood/wood_compare");
-        List<Wood> listWood;
-        if(ids!=null && !ids.isEmpty()) 
-            listWood = woodService.getListWoodByIds(ids);
-        else 
-            listWood = new ArrayList<>();
+        CompareCartWood compareCartWood = getAttributeFromSession(session, COMPARE_CART_WOOD, new CompareCartWood());
+        if(ids != null && !ids.isEmpty())
+            compareCartWood.reload(woodService.getListWoodByIds(ids));
+        
+        compareCartWood.calculatePreferences();
+        
+        List<Wood> listWood = new ArrayList<>(compareCartWood.getCompareSet());
         
         Message mes = new Message(listWood .toString()); 
         
@@ -58,10 +60,7 @@ public class ConlrollerCompareWood {
             HttpSession session ) 
     {
         CompareCartWood compareCartWood = getAttributeFromSession(session, COMPARE_CART_WOOD, new CompareCartWood());
-        
-        if(woodService.getWoodById(id) != null)
-            compareCartWood.addId(id);
-        
+        compareCartWood.add(woodService.getWoodById(id));
         session.setAttribute(COMPARE_CART_WOOD, compareCartWood);
         return "redirect:" + getAttributeFromSession(session, "currentpagewithpage", "index");
     }
@@ -70,7 +69,7 @@ public class ConlrollerCompareWood {
     public String delFromCompare(@PathVariable("id") String id, HttpSession session) 
     {
         CompareCartWood compareCartWood = getAttributeFromSession(session, COMPARE_CART_WOOD, new CompareCartWood());
-        compareCartWood.removeId(id); // delete from compare
+        compareCartWood.remove(woodService.getWoodById(id)); // delete from compare
         session.setAttribute(COMPARE_CART_WOOD, compareCartWood);
         return "redirect:/" + COMPARE_WOOD;
     }

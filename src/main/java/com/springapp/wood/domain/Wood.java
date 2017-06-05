@@ -5,6 +5,7 @@
  */
 package com.springapp.wood.domain;
 
+import com.springapp.wood.util.compare_wood.CompareWoodPreferences;
 import java.io.Serializable;
 import java.util.Locale;
 import javax.persistence.Basic;
@@ -18,6 +19,7 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -114,6 +116,9 @@ public abstract class Wood implements Serializable {
     @Column(name = "description_ru")
     private String descriptionRu;
 
+    @Transient
+    private CompareWoodPreferences preferences = new CompareWoodPreferences();
+    
     public Wood() {
     }
 
@@ -255,7 +260,11 @@ public abstract class Wood implements Serializable {
     public void setNumPackagesInVehicle(int numPackagesInVehicle) {
         this.numPackagesInVehicle = numPackagesInVehicle;
     }
-    
+
+    public CompareWoodPreferences getPreferences() {
+        return preferences;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -306,5 +315,38 @@ public abstract class Wood implements Serializable {
 
     public boolean isLaminatedParticleBoard(){
         return this instanceof LaminatedParticleBoard;
+    }
+    
+    public static final String LENGTH = "length";
+    public static final String WIDTH = "width";
+    public static final String THICKNESS = "thickness";
+    
+    public int getIntPropertyByName(String name){
+        switch (name){
+            case LENGTH: 
+                return length;
+            case WIDTH:
+                return width;
+            case THICKNESS:
+                return thickness;
+            default:
+                throw new Error("No such property");
+        }
+    }
+
+    public void setIntPropertyByName(String name, int value){
+        switch (name){
+            case LENGTH: 
+                length = value;
+                return;
+            case WIDTH:
+                width = value;
+                return;
+            case THICKNESS:
+                thickness = value;
+                return;
+            default:
+                throw new Error("No such property");
+        }
     }
 }
