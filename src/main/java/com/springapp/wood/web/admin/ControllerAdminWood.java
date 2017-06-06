@@ -44,17 +44,17 @@ public class ControllerAdminWood {
     
      ///       --------     Add pictures   ----------
     @RequestMapping(value = "/wood/photos", method = RequestMethod.GET)
-    public ModelAndView galleryLight(HttpServletRequest request, Map<String,Object> map){
+    public ModelAndView galleryWood(HttpServletRequest request, Map<String,Object> map){
         ModelAndView mv = new ModelAndView("admin/gallery_wood");
-        String path = request.getServletContext().getRealPath("") + "/resources/assets/images/products/wood/office";
-        mv.addObject("imageListLight", woodService.listImage(path));
+        String path = request.getServletContext().getRealPath("") + "/resources/assets/images/products/wood";
+        mv.addObject("imageListWood", woodService.listImage(path));
         return mv;
     }
     
     @RequestMapping(value = "/wood/photos/upload", method = RequestMethod.POST)
     public String adminUploadImagesLathe(@RequestParam("imageLathe") MultipartFile[] images, HttpServletRequest request){
         if (images != null && images.length > 0) {
-            String path = request.getServletContext().getRealPath("") + "/resources/assets/images/products/wood/office";
+            String path = request.getServletContext().getRealPath("") + "/resources/assets/images/products/wood";
 //            lighOfficeService.uploadImagesLathe(path, images);
             woodService.uploadImagesWood(path, images);
         }

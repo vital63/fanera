@@ -4,21 +4,12 @@
 <div id="sidebar">
     <ul id="floatMenu" class="mainmenu">
         
-      
-            
-       
-
-        
-        <li><a href="#">Lighting</a>
+        <li><a href="#">Wood</a>
                 <ul class="submenu">
-                    <li><a href="/admin/light">Add light</a></li>
-                    <li><a href="/admin/light/photos">Add photo light</a></li>
-
+                    <li><a href="/admin/wood">Add wood</a></li>
+                    <li><a href="/admin/wood/photos">Add photo wood</a></li>
                 </ul>
         </li>   
-        
-       
-        
         
     </ul>
 </div>
