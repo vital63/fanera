@@ -207,7 +207,7 @@ public abstract class Wood implements Serializable {
     }
 
     public String getDescription(Locale locale){
-        if (locale.toString().equals("russia"))
+        if (locale.toString().equals("ru"))
             return descriptionRu;
         else    
             return descriptionEn;
@@ -309,7 +309,6 @@ public abstract class Wood implements Serializable {
     }
     
     public boolean isRawPlywood(){
-        System.out.println("this instanceof RawPlywood: " + (this instanceof RawPlywood));
         return this instanceof RawPlywood;
     }
 

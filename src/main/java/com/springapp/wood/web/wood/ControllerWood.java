@@ -7,11 +7,19 @@ import com.springapp.wood.service.WoodService;
 
 import com.springapp.wood.domain.Wood;
 import com.springapp.wood.util.Utils;
-import java.util.ArrayList;
-import java.util.List;
+import com.springapp.wood.util.pdf.WoodPdf;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +29,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-public class ControllerWood extends PrintInFile {
-
+public class ControllerWood extends PrintInFile 
+{
     @Autowired
     WoodService woodService;
+    
+    @Autowired
+    private MessageSource messageSource;
  
     @RequestMapping(value = "/wood", method = RequestMethod.GET)
     public ModelAndView wood_all(@RequestParam(value = "types", required = false) String types,
@@ -71,39 +82,25 @@ public class ControllerWood extends PrintInFile {
         return mv;
     }
  
+    @RequestMapping(value =  "/wood/pdf/{url}", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getPdfSingle(Locale locale, HttpServletRequest request, @PathVariable ("url") String url )throws Exception 
+    {
+        String path = request.getServletContext().getRealPath("") + "/resources";
+        return getPDFOfferSingle(locale, path, url, "company", "director", Boolean.getBoolean("true"));
+    }
 
-//
-//    @RequestMapping(value =  "/plywood/pdf/{url}", method = RequestMethod.GET)
-//public ResponseEntity<byte[]> getPdfSingle(HttpServletRequest request, @PathVariable ("url") String url )throws Exception {
-////    public ResponseEntity<byte[]> getPdfSingle(@RequestParam("productId") String productId,
-////                                               @RequestParam(value = "company", required = false) String company,
-////                                               @RequestParam(value = "director", required = false) String director,
-////                                               @RequestParam("showPrice") String showPrice,
-////                                               HttpServletRequest request) throws Exception {
-//
-//        String path = request.getServletContext().getRealPath("") + "/resources";
-////        return getPDFOfferSingle(path, productId, company, "director", Boolean.getBoolean("true"));
-//        return getPDFOfferSingle(path, url, "company", "director", Boolean.getBoolean("true"));
-//      }
-    
-    
-    
+    private ResponseEntity<byte[]> getPDFOfferSingle(Locale locale, String path, String url, String company, String director, boolean showPrice) throws Exception 
+    {
+        Wood wood = woodService.getWoodByUrl(url);
+        WoodPdf woodPdf = new WoodPdf(locale, messageSource, path + "/fonts/times.ttf");
+        String pathPdf = woodPdf.createPdfWood(path, wood, company, director, showPrice);
+        byte[] contents = Files.readAllBytes(Paths.get(pathPdf));
 
-//    public ResponseEntity<byte[]> getPDFOfferSingle(String path, String url, String company, String director, boolean showPrice) throws Exception {
-////        Hmc machine = hmcDAO.getMachine(productId);
-//        Wood wood = woodService.getWoodByUrl(url);
-//        String pathPdf = LightPdf.createPdfLight(path, wood, company, director, showPrice);
-//
-//        File file = new File(pathPdf);
-//        byte[] contents = new byte[(int) file.length()];
-//        new FileInputStream(file).read(contents);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.parseMediaType("application/pdf"));
-//        String filename = "Light-" + light.getModel() + ".pdf";
-//        headers.setContentDispositionFormData(filename, filename);
-//        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-//        return new ResponseEntity<byte[]>(contents, headers, HttpStatus.OK);
-//    }
-    
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType("application/pdf"));
+        String filename = "Wood-" + wood.getName() + ".pdf";
+        headers.setContentDispositionFormData(filename, filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        return new ResponseEntity<byte[]>(contents, headers, HttpStatus.OK);
+    }
 }

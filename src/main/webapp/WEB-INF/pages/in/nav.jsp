@@ -93,7 +93,7 @@
                     <ul class="dropdown-menu" role="menu" >
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="?lang=en">Global | English</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="?lang=usa">USA | English</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="?lang=russia">Russia | Russian  </a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="?lang=ru">Russia | Russian  </a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="?lang=ukraine">Ukraine | Ukrainian </a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="?lang=belarus">Belarus | Belarusian </a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="?lang=turkish">Turkish | Tr</a></li>

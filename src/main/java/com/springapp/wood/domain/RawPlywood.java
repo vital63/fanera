@@ -48,6 +48,10 @@ public class RawPlywood extends Wood {
     public void setIsSanded(Boolean isSanded) {
         this.isSanded = isSanded;
     }
+    
+    public String getIsSandedAsString(){
+        return isSanded ? "sanded" : "unsanded";
+    }
 
     public Boolean getIsWaterResistance() {
         return isWaterResistance;
@@ -55,6 +59,10 @@ public class RawPlywood extends Wood {
 
     public void setIsWaterResistance(Boolean isWaterResistance) {
         this.isWaterResistance = isWaterResistance;
+    }
+    
+    public String getIsWaterResistanceAsString() {
+        return isWaterResistance ? "FK" : "-";
     }
 
     public static final String TYPE_NAME = "Raw Plywood";
