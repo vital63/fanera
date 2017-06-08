@@ -1,13 +1,9 @@
 package com.springapp.wood.util.excel;
 
-//import com.springapp.mvc.domain.common.LanguageEntity;
-//import com.springapp.mvc.domain.Letter;
 import com.springapp.wood.domain.LaminatedParticleBoard;
 import com.springapp.wood.domain.RawPlywood;
 import com.springapp.wood.domain.Wood;
 
-
-//import com.springapp.mvc.domain.lathe.*;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
@@ -17,9 +13,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.util.Iterator;
 
 public class ParserExcelWood  {
@@ -47,7 +44,6 @@ public class ParserExcelWood  {
             DataFormatter df = new DataFormatter();
 
             String id = getId(df.formatCellValue(rowIterator.next().getCell(1)).trim());
-            printInFile("readWood.txt", "1");
 
             Wood wood;
             String type = df.formatCellValue(rowIterator.next().getCell(1)).trim().toLowerCase();
@@ -70,7 +66,7 @@ public class ParserExcelWood  {
 
             wood.setUrl(getUrl(wood.getId())); 
             
-            rowIterator.next();
+            wood.setPrice(doubleFromCell(rowIterator, df));
 
             wood.setPhoto1(df.formatCellValue(rowIterator.next().getCell(1)).trim());
             wood.setPhoto2(df.formatCellValue(rowIterator.next().getCell(1)).trim());
@@ -86,7 +82,6 @@ public class ParserExcelWood  {
             return wood;
         }
     }
-    
     
     private static String getUrl(String str){
         return replaceSpecStringsBySubstring(str, "-");
@@ -127,6 +122,34 @@ public class ParserExcelWood  {
         return tt;
     }
     
+    private static double doubleFromCell (Iterator<Row> rowIterator, DataFormatter df ){
+        Row tmp = rowIterator.next();
+        ParseException parseException = null;
+        try {
+            return (double)tmp.getCell(1).getNumericCellValue();
+        } 
+        catch (Exception e) {
+            for(Character sep: new Character[]{'.', ','})
+                try{
+                    return getDecimalFormatForDecimalSeparator(sep).parse(df.formatCellValue(tmp.getCell(1)).trim()).doubleValue();
+                } 
+                catch(ParseException pe){
+                    parseException = pe; //continue cycle;
+                }
+        }
+        
+        throw new Error(parseException);
+    }
+    
+    private static DecimalFormat getDecimalFormatForDecimalSeparator(Character separator)
+    {
+        DecimalFormat decimalFormat = new DecimalFormat();
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator(separator);
+        decimalFormat.setDecimalFormatSymbols(symbols);
+        return decimalFormat;
+    }
+    
     private static boolean booleanFromSpecValue (Iterator<Row> rowIterator, DataFormatter df, 
             String trueS, String falseS ) throws IOException
     {
@@ -152,18 +175,7 @@ public class ParserExcelWood  {
         rpw.setIsWaterResistance(booleanFromSpecValue(rowIterator, df, "FK", "-"));
     }
     
-    private static void readLaminatedParticleBoardParameters(LaminatedParticleBoard lpb, Iterator<Row> rowIterator, DataFormatter df){
+    private static void readLaminatedParticleBoardParameters(LaminatedParticleBoard lpb, Iterator<Row> rowIterator, DataFormatter df) {
         lpb.setLaminatedColor(df.formatCellValue(rowIterator.next().getCell(1)).trim());
-    }
-    
-    static void printInFile(String fileName, String str){    // For Check
-        File file = new File("c:/2/"+fileName);
-        try (FileWriter fileWriter = new FileWriter(file, true)) 
-        {
-            fileWriter.write("-------> "+new Date()+"): \n");
-            fileWriter.write(str + "\n\n");
-        } catch (IOException ex) {
-//            Logger.getLogger(ControllerMachine.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }
