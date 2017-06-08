@@ -3,7 +3,7 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package com.springapp.wood.service;
+package com.springapp.wood.service.interfaces;
 
 
 

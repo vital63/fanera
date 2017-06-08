@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.springapp.wood.dao;
+package com.springapp.wood.dao.implementations;
 
 
+import com.springapp.wood.dao.interfaces.WoodDao;
 import com.springapp.wood.domain.LaminatedParticleBoard;
 import com.springapp.wood.domain.RawPlywood;
 import com.springapp.wood.domain.Wood;

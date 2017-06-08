@@ -74,7 +74,7 @@ public abstract class Wood implements Serializable {
     private int thickness;
 
     @Column(name = "price")
-    private Double price;
+    private double price;
     
     @Basic(optional = false)
     @NotNull
@@ -237,11 +237,11 @@ public abstract class Wood implements Serializable {
         this.thickness = thickness;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

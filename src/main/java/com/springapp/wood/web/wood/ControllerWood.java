@@ -3,7 +3,7 @@ package com.springapp.wood.web.wood;
 
 import com.springapp.mvc.domain.message.Message;
 import com.springapp.mvc.util.PrintInFile;
-import com.springapp.wood.service.WoodService;
+import com.springapp.wood.service.interfaces.WoodService;
 
 import com.springapp.wood.domain.Wood;
 import com.springapp.wood.util.Utils;

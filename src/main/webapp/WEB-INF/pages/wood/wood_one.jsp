@@ -247,7 +247,7 @@
                                             </div>-->
                 
                 
-                                <!--<a id="addto-cart" href="/add-product-to-customer-basket?id=${vmc.id}&model=${vmc.model}"  class="le-button huge"><spring:message code="vmc.addtocart" text="add to cart" /> </a>-->
+                                <a id="addto-cart" href="/wood-cart-add?id=${wood.id}"  class="le-button huge"><spring:message code="woodall.add_to_cart" text="add to cart" /> </a>
                                 <a id="addto-cart" href="/wood/pdf/${wood.url}"  class="le-button huge"><spring:message code="lightone.download_pdf" text="Download PDF" /> </a>
     
                                 

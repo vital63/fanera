@@ -1,11 +1,12 @@
 
-package com.springapp.wood.service;
+package com.springapp.wood.service.implementations;
 
+import com.springapp.wood.service.interfaces.WoodService;
 import com.springapp.wood.domain.Wood;
 
 import com.springapp.light.util.ImageUtilLight;
 import com.springapp.light.util.UploadMultipartFileUtilLight;
-import com.springapp.wood.dao.WoodDao;
+import com.springapp.wood.dao.interfaces.WoodDao;
 import com.springapp.wood.domain.WoodLength;
 import com.springapp.wood.domain.WoodThickness;
 import com.springapp.wood.domain.WoodType;

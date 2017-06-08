@@ -2,6 +2,7 @@ package com.springapp.wood.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 public class Utils {
     public static List<Integer> stringDelimToListInt(String inputS) {
@@ -25,6 +26,14 @@ public class Utils {
         for (String s : input.split(",")) 
             result.add(s);
 
+        return result;
+    }
+
+    public static <T> T getAttributeFromSession(HttpSession session, String attrName, T defValue) {
+        T result = (T) session.getAttribute(attrName);
+        if (result == null) {
+            result = defValue;
+        }
         return result;
     }
 }

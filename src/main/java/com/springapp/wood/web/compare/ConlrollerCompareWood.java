@@ -1,9 +1,10 @@
 
-package com.springapp.wood.web;
+package com.springapp.wood.web.compare;
 
 import com.springapp.mvc.domain.message.Message;
-import com.springapp.wood.service.WoodService;
+import com.springapp.wood.service.interfaces.WoodService;
 import com.springapp.wood.domain.Wood;
+import com.springapp.wood.util.Utils;
 import com.springapp.wood.util.compare_wood.CompareCartWood;
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public class ConlrollerCompareWood {
     
     @RequestMapping(value =  "/" + COMPARE_WOOD, method = RequestMethod.GET)
     public String compareWood(HttpSession session) {
-        CompareCartWood compareCartWood = getAttributeFromSession(session, COMPARE_CART_WOOD, new CompareCartWood());
+        CompareCartWood compareCartWood = Utils.getAttributeFromSession(session, COMPARE_CART_WOOD, new CompareCartWood());
         return "redirect:/" + COMPARE_WOOD + "?ids=" + compareCartWood.getIds();
     }
     
@@ -35,7 +36,7 @@ public class ConlrollerCompareWood {
     public ModelAndView compareWoodWithID( @RequestParam(value = "ids", required = false) String ids, HttpSession session)
     {
         ModelAndView mv = new ModelAndView("wood/wood_compare");
-        CompareCartWood compareCartWood = getAttributeFromSession(session, COMPARE_CART_WOOD, new CompareCartWood());
+        CompareCartWood compareCartWood = Utils.getAttributeFromSession(session, COMPARE_CART_WOOD, new CompareCartWood());
         if(ids != null && !ids.isEmpty())
             compareCartWood.reload(woodService.getListWoodByIds(ids));
         
@@ -59,26 +60,18 @@ public class ConlrollerCompareWood {
             @RequestParam(value = "pagereturn") String pagereturn,
             HttpSession session ) 
     {
-        CompareCartWood compareCartWood = getAttributeFromSession(session, COMPARE_CART_WOOD, new CompareCartWood());
+        CompareCartWood compareCartWood = Utils.getAttributeFromSession(session, COMPARE_CART_WOOD, new CompareCartWood());
         compareCartWood.add(woodService.getWoodById(id));
         session.setAttribute(COMPARE_CART_WOOD, compareCartWood);
-        return "redirect:" + getAttributeFromSession(session, "currentpagewithpage", "index");
+        return "redirect:" + Utils.getAttributeFromSession(session, "currentpagewithpage", "index");
     }
     
     @RequestMapping(value = "/compare-wood-del-{id}", method = RequestMethod.GET)
     public String delFromCompare(@PathVariable("id") String id, HttpSession session) 
     {
-        CompareCartWood compareCartWood = getAttributeFromSession(session, COMPARE_CART_WOOD, new CompareCartWood());
+        CompareCartWood compareCartWood = Utils.getAttributeFromSession(session, COMPARE_CART_WOOD, new CompareCartWood());
         compareCartWood.remove(woodService.getWoodById(id)); // delete from compare
         session.setAttribute(COMPARE_CART_WOOD, compareCartWood);
         return "redirect:/" + COMPARE_WOOD;
-    }
-    
-    private static <T> T getAttributeFromSession(HttpSession session, String attrName, T defValue) {
-        T result = (T) session.getAttribute(attrName);
-        if (result == null) 
-            result = defValue;
-        
-        return result;
     }
 }

@@ -1,6 +1,6 @@
 package com.springapp.wood.web.admin;
 
-import com.springapp.wood.service.WoodService;
+import com.springapp.wood.service.interfaces.WoodService;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

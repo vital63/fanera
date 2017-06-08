@@ -147,21 +147,20 @@
                         <div class="row">
                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                 <div class="thumb">
-                                    <a href="/from_cart?id=${prod.product.id}&model=${prod.product.model}">
-                                    <img alt="" src="${pageContext.request.contextPath}/resources/assets/images/products/${prod.product.photo1}" />
+                                    <a href="/wood-cart-from?id=${prod.wood.id}">
+                                    <img alt="" src="${pageContext.request.contextPath}/resources/assets/images/products/${prod.wood.photo1}" />
                                     </a>
                                 </div>
                             </div>
                             <div class="col-xs-8 col-sm-8 no-margin">
-                                <div class="title">${prod.product.model} (id:${prod.product.productid}) </div>
+                                <div class="title">${prod.wood.name} (id:${prod.wood.id}) </div>
                                 <sec:authorize access="hasRole('ROLE_USER')">
-                                    <div class="price">${prod.product.price} </div>
+                                    <div class="price">${prod.wood.price} </div>
                                 </sec:authorize>
                                 <div class="price">${prod.quantity} units</div>
                             </div>
                         </div>
-                        <!--<a class="close-btn" href="/del-from-basket?id=${prod.product.id}&page=index"></a>-->
-                        <a class="close-btn" href="/del-from-basket?id=${prod.product.id}&model=${prod.product.model}"></a>
+                        <a class="close-btn" href="/wood-cart-del?id=${prod.wood.id}"></a>
                     </div>
                 </li>
 </c:forEach>
@@ -205,10 +204,10 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
                                 <!--<a href="cart.html.html" class="le-button inverse">View cart</a>-->
-                                <a href="/cart" class="le-button inverse">View cart</a>
+                                <a href="/wood-cart" class="le-button inverse">View cart</a>
                             </div>
                             <div class="col-xs-12 col-sm-6">
-                                <a href="/checkout" class="le-button">Checkout</a>
+                                <a href="/wood-checkout" class="le-button">Checkout</a>
                                 <!--<a href="checkout.html" class="le-button">Checkout</a>-->
                             </div>
                         </div>

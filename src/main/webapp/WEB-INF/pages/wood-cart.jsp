@@ -110,16 +110,16 @@
 -->       <c:forEach var="item" items="${cart.items}">
             <div class="row no-margin cart-item">
                 <div class="col-xs-12 col-sm-2 no-margin">
-                    <a href="/from_cart?id=${item.product.id}&model=${item.product.model}" class="thumb-holder">
-                        <img class="lazy" alt="" width="73" height="73" src="resources/assets/images/products/${item.product.photo1}" />
+                    <a href="wood-cart-from?id=${item.wood.id}" class="thumb-holder">
+                        <img class="lazy" alt="" width="73" height="73" src="resources/assets/images/products/${item.wood.photo1}" />
                     </a>
                 </div>
 
                 <div class="col-xs-12 col-sm-5 ">
                     <div class="title">
-                        <a href="/from_cart?id=${item.product.id}&model=${item.product.model}">${item.product.model}</a>
+                        <a href="/wood-cart-from?id=${item.wood.id}">${item.wood.name}</a>
                     </div>
-                    <div class="brand">${item.product.year} / location: ${item.product.machinelocation} / id: ${item.product.productid}  </div>
+                    <div class="brand">${item.wood.name}/ id: ${item.wood.id}  </div>
                 </div> 
 
                 
@@ -130,12 +130,12 @@
                     <div class="quantity">
                         <div class="le-quantity">
                               <form>
-            <a class="minus" href="#reduce" onclick="window.location.assign('/updatequantity?id=${item.product.id}&model=${item.product.model}&quantity=${item.quantity-1}');"></a>
+            <a class="minus" href="#reduce" onclick="window.location.assign('/updatequantity?id=${item.wood.id}&quantity=${item.quantity-1}');"></a>
                                 <!--<a class="minus" href="#reduce"></a>-->
             <input name="quantity" readonly="readonly" type="text"  value="${item.quantity}" /> </a> 
         <!--<input name="quantity" readonly="readonly" type="text" value="${item.quantity}" />-->
                                 <!--<a class="plus" href="#add"></a>-->
-            <a class="plus" href="#add"  onclick="window.location.assign('/updatequantity?id=${item.product.id}&model=${item.product.model}&quantity=${item.quantity+1}');"></a> 
+            <a class="plus" href="#add"  onclick="window.location.assign('/updatequantity?id=${item.wood.id}&quantity=${item.quantity+1}');"></a> 
                             
                             
                           
@@ -154,12 +154,12 @@
 
                 <div class="col-xs-12 col-sm-2 no-margin">
                     <div class="price">
-                        <sec:authorize access="hasRole('ROLE_ADMIN')">
-                            ${item.product.price} * ${item.quantity}<br> = ${item.total}                             
-                        </sec:authorize>
+                        <%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
+                            ${item.wood.price} * ${item.quantity}<br> = ${item.total}                             
+                        <%--</sec:authorize>--%>
                     </div>
 
-                    <a class="close-btn" href="updatequantity.htm?id=${item.product.id}&model=${item.product.model}&quantity=0"></a>
+                    <a class="close-btn" href="updatequantity.htm?id=${item.wood.id}&model=${item.wood.name}&quantity=0"></a>
                 </div>
             </div> 
                     <!--/.cart-item--> 
@@ -296,13 +296,13 @@
                     <ul id="total-price" class="tabled-data inverse-bold no-border">
                         <li>
                             <label>order total</label>
-                                <sec:authorize access="hasRole('ROLE_USER')">
+                                <%--<sec:authorize access="hasRole('ROLE_USER')">--%>
                                     <div class="value pull-right">${cart.total}</div>
-                                </sec:authorize>
+                                <%--</sec:authorize>--%>
                         </li>
                     </ul>
                     <div class="buttons-holder">
-                        <a class="le-button big" href="checkout" >checkout</a>
+                        <a class="le-button big" href="wood-checkout" >checkout</a>
                         <a class="simple-link block" href="index" >continue shopping</a>
                     </div>
                 </div>
