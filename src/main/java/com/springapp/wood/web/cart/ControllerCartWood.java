@@ -2,21 +2,29 @@ package com.springapp.wood.web.cart;
 
 import com.springapp.mvc.domain.message.Message;
 import com.springapp.wood.cart.ShoppingCart;
+import com.springapp.wood.cart.ShoppingCartItem;
 import com.springapp.wood.service.interfaces.WoodOrdersService;
 import com.springapp.wood.domain.Wood;
+import com.springapp.wood.domain.WoodOrder;
 import com.springapp.wood.service.interfaces.WoodService;
 import com.springapp.wood.util.Utils;
+import java.util.Date;
+import java.util.List;
 
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ControllerCartWood {
@@ -84,77 +92,40 @@ public class ControllerCartWood {
           
     // -------- ---------  checkout : start ------------- -----------
         
-//    @RequestMapping(value = "/wood-checkout", method = RequestMethod.GET)
-//    public void checkout(HttpSession session,  Map<String, Object> map) {
-//        
-////        ModelAndView mv = new ModelAndView("checkout");
-//        
-//        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-//        if (cart==null)  cart = new ShoppingCart();
-//        cart.calculateTotal(); // GDP (for example)
-//         session.setAttribute("cart", cart); 
-////         Order order = new Order();
-////         order.setFirstname("Dimitry");
-//        
-//
-//         map.put("order", new WoodOrder()); 
-//         
-//        String currentpagewithpage = (String)session.getAttribute("currentpagewithpage");              
-//          if (currentpagewithpage == null) currentpagewithpage = "index";
-//          
-//         session.setAttribute("currentpagewithpage", "checkout");
-//        
-////       return mv; 
-//    }  
-//    
-//    @RequestMapping(value = "/wood-checkout", method = RequestMethod.POST)
-//    public ModelAndView checkoutPOST(@Valid @ModelAttribute ("order") WoodOrder order, BindingResult result, HttpSession session) 
-//    {
-//         ModelAndView mv = new ModelAndView("checkoutfinish");
-//        
-//           if(result.hasErrors()){
-//             mv = new ModelAndView("checkout");
-//             mv.addObject("order", order);
-////           List<TypeStanina> listTypeStanina= typeStaninaDAO.listTypeStanina();
-////           mv.addObject("listTypeStanina", listTypeStanina);
-//             return mv;             
-//             }  
-//      
-//        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-//        if (cart==null)  cart = new ShoppingCart();
-////        cart.calculateTotal("0"); // GDP (for example)
-////        orderJDBCTemplate
-////         session.setAttribute("cart", cart); 
-//        
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd");
-//String dateInString = "2017-01-01";
-////        try {
-////            Date date = sdf.parse(dateInString);
-//            Date date = new Date();
-//        order.setDatatime(date);
-////        } catch (ParseException ex) {
-////            Logger.getLogger(ControllerCartWood.class.getName()).log(Level.SEVERE, null, ex);
-////        }
-//
-////        order.setDatatime("2015-06-02");
-//        order.setStatus("in");
-//        
-//      List <ShoppingCartItem> list =   cart.getItems();
-//  String query ="";    
-//      for(ShoppingCartItem ttt: list){
-//          query += ttt.getWood().getId();
-//          query += "<br>->" + ttt.getWood().getName();
-//          query += "<br>";
-//      }
-//        order.setRequest(query);
-//        
-//        
-//    woodOrdersService.addOrder(order);
-//        cart = null;
-//        session.setAttribute("cart", cart);
-//        session.setAttribute("currentpagewithpage", "checkout");
-//        
-//        return mv; 
-//    }  
-
+    @RequestMapping(value = "/wood-checkout", method = RequestMethod.GET)
+    public void checkout(HttpSession session,  Map<String, Object> map) 
+    {
+        ShoppingCart cart = Utils.getAttributeFromSession(session, "cart", new ShoppingCart());
+        cart.calculateTotal();
+        session.setAttribute("cart", cart);
+        WoodOrder order = new WoodOrder();
+        map.put("order", order); 
+        session.setAttribute("currentpagewithpage", "wood-checkout");
+    }  
+    
+    @RequestMapping(value = "/wood-checkout", method = RequestMethod.POST)
+    public ModelAndView checkoutPOST(@Valid @ModelAttribute ("order") WoodOrder order, BindingResult result, HttpSession session) 
+    {
+        if(result.hasErrors())
+            return new ModelAndView("wood-checkout").addObject("order", order);
+      
+        List <ShoppingCartItem> list = Utils.getAttributeFromSession(session, "cart", new ShoppingCart()).getItems();
+        String query = "";
+        for(ShoppingCartItem item: list)
+        {
+            query += item.getWood().getId() + "<br>";
+            query += item.getQuantity() + "<br>";
+        }
+        
+        order.setRequest(query);
+        order.setDatatime(new Date());
+        order.setStatus("in");
+        
+        woodOrdersService.addOrder(order);
+        
+        session.setAttribute("cart", null);
+        session.setAttribute("currentpagewithpage", "wood-checkout");
+        
+        return new ModelAndView("checkoutfinish"); 
+    }  
 }

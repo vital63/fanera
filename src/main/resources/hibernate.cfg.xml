@@ -29,6 +29,7 @@
         <mapping class="com.springapp.wood.domain.WoodWidth"/>
         <mapping class="com.springapp.wood.domain.WoodThickness"/>
         <mapping class="com.springapp.wood.domain.WoodType"/>
+        <mapping class="com.springapp.wood.domain.WoodOrder"/>
 
 
     </session-factory>

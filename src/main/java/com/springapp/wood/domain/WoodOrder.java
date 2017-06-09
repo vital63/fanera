@@ -12,22 +12,23 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="order", schema = "", catalog = "fanera")
 public class WoodOrder implements Serializable 
 {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
     
-//    @NotEmpty
-//    @Column(name = "user")
-//    private User user;
+    @NotEmpty 
+    @Column(name = "username")
+    private String username;
     
 //    set of items
 
@@ -41,7 +42,7 @@ public class WoodOrder implements Serializable
     
     @Column(name = "status")
     private String status;
-
+    
     public WoodOrder() {
     }
 
@@ -81,6 +82,14 @@ public class WoodOrder implements Serializable
         this.status = status;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
