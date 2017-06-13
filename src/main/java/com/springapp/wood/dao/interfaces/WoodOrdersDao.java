@@ -1,6 +1,6 @@
 package com.springapp.wood.dao.interfaces;
 
-import com.springapp.mvc.domain.order.Orders;
+import com.springapp.wood.domain.ShoppingCartItem;
 import java.util.List;
 import com.springapp.wood.domain.WoodOrder;
 

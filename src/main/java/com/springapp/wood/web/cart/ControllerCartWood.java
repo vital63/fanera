@@ -2,7 +2,7 @@ package com.springapp.wood.web.cart;
 
 import com.springapp.mvc.domain.message.Message;
 import com.springapp.wood.cart.ShoppingCart;
-import com.springapp.wood.cart.ShoppingCartItem;
+import com.springapp.wood.domain.ShoppingCartItem;
 import com.springapp.wood.service.interfaces.WoodOrdersService;
 import com.springapp.wood.domain.Wood;
 import com.springapp.wood.domain.WoodOrder;
@@ -115,6 +115,9 @@ public class ControllerCartWood {
         {
             query += item.getWood().getId() + "<br>";
             query += item.getQuantity() + "<br>";
+
+            order.getCartItems().add(item);
+            item.setOrder(order);
         }
         
         order.setRequest(query);

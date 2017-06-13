@@ -1,5 +1,6 @@
 package com.springapp.wood.cart;
 
+import com.springapp.wood.domain.ShoppingCartItem;
 import com.springapp.wood.domain.Wood;
 import java.util.ArrayList;
 import java.util.List;

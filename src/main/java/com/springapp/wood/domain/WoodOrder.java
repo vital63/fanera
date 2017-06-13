@@ -2,13 +2,17 @@ package com.springapp.wood.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,8 +34,6 @@ public class WoodOrder implements Serializable
     @Column(name = "username")
     private String username;
     
-//    set of items
-
     @Lob
     @Column(name = "request")
     private String request;
@@ -43,11 +45,10 @@ public class WoodOrder implements Serializable
     @Column(name = "status")
     private String status;
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    private Set<ShoppingCartItem> cartItems = new HashSet<>();
+    
     public WoodOrder() {
-    }
-
-    public WoodOrder(Integer id) {
-        this.id = id;
     }
 
     public Integer getId() {
@@ -88,6 +89,14 @@ public class WoodOrder implements Serializable
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Set<ShoppingCartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(Set<ShoppingCartItem> cartItems) {
+        this.cartItems = cartItems;
     }
     
     @Override

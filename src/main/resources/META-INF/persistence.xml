@@ -70,6 +70,7 @@
     <class>com.springapp.wood.domain.WoodThickness</class>
     <class>com.springapp.wood.domain.WoodType</class>
     <class>com.springapp.wood.domain.WoodOrder</class>
+    <class>com.springapp.wood.domain.ShoppingCartItem</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hmc?zeroDateTimeBehavior=convertToNull"/>
