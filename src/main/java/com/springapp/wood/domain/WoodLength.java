@@ -5,6 +5,7 @@
  */
 package com.springapp.wood.domain;
 
+import com.springapp.wood.util.Utils;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
-@Table(name="wood_length", schema = "", catalog = "fanera")
+@Table(name="wood_length", schema = "", catalog = Utils.SCHEMA_NAME)
 @XmlRootElement
 //@NamedQueries({
 //    @NamedQuery(name = "WoodThickness.findAll", query = "SELECT l FROM WoodThickness l"),

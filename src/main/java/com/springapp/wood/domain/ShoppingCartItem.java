@@ -1,5 +1,6 @@
 package com.springapp.wood.domain;
 
+import com.springapp.wood.util.Utils;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cart_item", schema = "", catalog = "fanera")
+@Table(name = "cart_item", schema = "", catalog = Utils.SCHEMA_NAME)
 public class ShoppingCartItem
 {
     private static final long serialVersionUID = 1L;

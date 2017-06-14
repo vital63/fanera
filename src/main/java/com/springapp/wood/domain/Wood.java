@@ -5,6 +5,7 @@
  */
 package com.springapp.wood.domain;
 
+import com.springapp.wood.util.Utils;
 import com.springapp.wood.util.compare_wood.CompareWoodPreferences;
 import java.io.Serializable;
 import java.util.Locale;
@@ -16,8 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -26,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
-@Table(name="wood", schema = "", catalog = "fanera")
+@Table(name="wood", schema = "", catalog = Utils.SCHEMA_NAME)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
 @XmlRootElement

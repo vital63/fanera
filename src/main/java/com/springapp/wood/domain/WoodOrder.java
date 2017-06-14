@@ -1,5 +1,6 @@
 package com.springapp.wood.domain;
 
+import com.springapp.wood.util.Utils;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="order", schema = "", catalog = "fanera")
+@Table(name="order", schema = "", catalog = Utils.SCHEMA_NAME)
 public class WoodOrder implements Serializable 
 {
     private static final long serialVersionUID = 1L;

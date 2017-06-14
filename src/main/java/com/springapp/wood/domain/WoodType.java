@@ -5,6 +5,7 @@
  */
 package com.springapp.wood.domain;
 
+import com.springapp.wood.util.Utils;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -20,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Home
  */
 @Entity
-@Table(name="wood_type", schema = "", catalog = "fanera")
+@Table(name="wood_type", schema = "", catalog = Utils.SCHEMA_NAME)
 @XmlRootElement
 //@NamedQueries({
 //    @NamedQuery(name = "LightOfficeType.findAll", query = "SELECT l FROM LightOfficeType l"),

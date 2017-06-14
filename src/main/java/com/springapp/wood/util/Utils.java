@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 public class Utils {
+    public static final String SCHEMA_NAME = "fanera";
+    
     public static List<Integer> stringDelimToListInt(String inputS) {
         if (inputS == null || inputS.isEmpty()) 
             return null;
