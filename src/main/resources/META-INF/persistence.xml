@@ -2,7 +2,7 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="com.springapp_HMCApp_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.springapp.mvc.domain.vmc.Vmc</class>
+<!--    <class>com.springapp.mvc.domain.vmc.Vmc</class>
     <class>com.springapp.mvc.domain.lathe.Lathe</class>
     <class>com.springapp.mvc.domain.Letter</class>
     <class>com.springapp.mvc.domain.vmc.VmcBrand</class>
@@ -60,7 +60,7 @@
     <class>com.springapp.light.domain.LightStreetPower</class>
     <class>com.springapp.boiler.domain.AirHeaterPower</class>
     <class>com.springapp.boiler.domain.AirHeater</class>
-    <class>com.springapp.light.domain.LightIndustrialLidc</class>
+    <class>com.springapp.light.domain.LightIndustrialLidc</class>-->
     
     <class>com.springapp.wood.domain.Wood</class>
     <class>com.springapp.wood.domain.RawPlywood</class>

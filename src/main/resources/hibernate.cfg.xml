@@ -13,13 +13,13 @@
 
         <mapping class="com.springapp.mvc.domain.User"/>
         
-        <mapping class="com.springapp.mvc.domain.order.Orders"/>
+<!--        <mapping class="com.springapp.mvc.domain.order.Orders"/>
         <mapping class="com.springapp.mvc.domain.manufacturer.Manufacturer"/>
           
         <mapping class="com.springapp.light.domain.LightOffice"/>
         <mapping class="com.springapp.light.domain.LightOfficeType"/>
         <mapping class="com.springapp.light.domain.LightOfficePower"/>
-        <mapping class="com.springapp.light.domain.LightOfficeSize"/>
+        <mapping class="com.springapp.light.domain.LightOfficeSize"/>-->
          
         <mapping class="com.springapp.wood.domain.Wood"/>
         <mapping class="com.springapp.wood.domain.RawPlywood"/>
