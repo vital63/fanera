@@ -5,7 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 public class Utils {
-    public static final String SCHEMA_NAME = "fanera";
+//    public static final String SCHEMA_NAME = "fanera";
+    public static final String SCHEMA_NAME = "heroku_12671a7e1efae2d";
     
     public static List<Integer> stringDelimToListInt(String inputS) {
         if (inputS == null || inputS.isEmpty()) 
