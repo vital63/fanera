@@ -22,14 +22,12 @@ public class WoodOrdersDaoImpl implements WoodOrdersDao
     @Override
     @SuppressWarnings("unchecked")
     public int getAmountOfOrders() {
-        List<WoodOrder> list1 = (List<WoodOrder> ) sessionFactory.getCurrentSession().createQuery("from Orders where status='in'").list();
-        return list1.size();
+        return getListOrders().size();
     }
     
     @Override  
     @SuppressWarnings("unchecked")
     public List<WoodOrder> getListOrders(){
-        List<WoodOrder> list1 = (List<WoodOrder> ) sessionFactory.getCurrentSession().createQuery("from Orders where status='in'").list();
-        return list1;
+        return (List<WoodOrder> ) sessionFactory.getCurrentSession().createQuery("from WoodOrder where status='in'").list();
     }
 }
