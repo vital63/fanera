@@ -6,8 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+import com.springapp.wood.util.Utils;
+
 @Entity
-@Table(name="users", schema = "", catalog = "light_test")
+@Table(name="users", schema = "", catalog = Utils.SCHEMA_NAME)
 public class User implements Serializable{
     @Id
     @Column(name = "num")
