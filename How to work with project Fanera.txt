@@ -1,0 +1,4 @@
+Исходники программы настроены на работу с удаленной базой данных, которую предоставил сервис heroku.com. Для работы с локальной базой данных необходимо:
+- создать таблицы базы данных с помощью файла for creation DB/fanera.mwb
+- в файле src/main/webapp/WEB-INF/utils.properties изменить значения ключей jdbc.databaseurl, jdbc.username, jdbc.password для вашей базы данных.
+- в файле src/main/java/com/springap/wood/util/Utils.java изменить значение константы SCHEMA_NAME для вашей базы данных.
